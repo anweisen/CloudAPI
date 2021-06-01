@@ -14,19 +14,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>wrapper</module>
 		<module>driver</module>
 		<module>node</module>
+		<module>wrapper</module>
 	</modules>
-
-	<dependencies>
-
-		<dependency>
-			<groupId>com.google.code.findbugs</groupId>
-			<artifactId>jsr305</artifactId>
-			<version>3.0.2</version>
-		</dependency>
-
-	</dependencies>
 
 </project>

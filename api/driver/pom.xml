@@ -10,13 +10,45 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>driver-api</artifactId>
+	<artifactId>api-driver</artifactId>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<utilities.version>1.2.7</utilities.version>
 	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.anweisen.utilities</groupId>
+			<artifactId>common-utils</artifactId>
+			<version>${utilities.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.anweisen.utilities</groupId>
+			<artifactId>database-api</artifactId>
+			<version>${utilities.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<repositories>
+
+		<repository>
+			<id>anweisen</id>
+			<url>https://github.com/anweisen/*</url>
+		</repository>
+
+	</repositories>
 
 	<build>
 
