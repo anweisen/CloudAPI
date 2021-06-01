@@ -1,5 +1,7 @@
 package net.anweisen.cloudapi.driver.permission;
 
+import net.anweisen.cloudapi.driver.permission.info.PermissionInfo;
+
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Map;
@@ -178,6 +180,9 @@ public interface Permissible {
 	 * @param taskGroup the group on which the permission should be removed, eg Lobby
 	 * @param permission the permission to remove
 	 * @return {@code true} if the permission was removed successfully, {@code false} if the given permission was not set
+	 *
+	 * @throws UnsupportedOperationException
+	 *         If this cloud does not support permissions on specific task groups
 	 */
 	boolean removePermission(@Nonnull String taskGroup, @Nonnull String permission);
 

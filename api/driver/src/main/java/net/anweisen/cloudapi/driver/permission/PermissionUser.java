@@ -1,5 +1,7 @@
 package net.anweisen.cloudapi.driver.permission;
 
+import net.anweisen.cloudapi.driver.permission.info.PermissionUserGroupInfo;
+
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.UUID;

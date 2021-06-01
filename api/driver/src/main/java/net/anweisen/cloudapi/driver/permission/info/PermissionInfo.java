@@ -1,4 +1,4 @@
-package net.anweisen.cloudapi.driver.permission;
+package net.anweisen.cloudapi.driver.permission.info;
 
 import javax.annotation.Nonnull;
 

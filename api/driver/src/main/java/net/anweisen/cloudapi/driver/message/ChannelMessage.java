@@ -1,0 +1,111 @@
+package net.anweisen.cloudapi.driver.message;
+
+import net.anweisen.cloudapi.driver.CloudDriver;
+import net.anweisen.cloudapi.driver.utils.task.Task;
+import net.anweisen.utilities.commons.config.Document;
+
+import javax.annotation.CheckReturnValue;
+import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.function.Consumer;
+
+/**
+ * @author anweisen | https://github.com/anweisen
+ * @since 1.0
+ */
+public interface ChannelMessage {
+
+	@Nonnull
+	String getSender();
+
+	@Nonnull
+	String getChannel();
+
+	@Nonnull
+	String getMessage();
+
+	@Nonnull
+	Document getData();
+
+	@Nonnull
+	default CloudMessenger getMessenger() {
+		return CloudDriver.getInstance().getMessenger();
+	}
+
+	default void send() {
+		getMessenger().sendMessage(this);
+	}
+
+	@Nonnull
+	default Collection<ChannelMessage> sendQuery() {
+		return getMessenger().sendMessageQuery(this);
+	}
+
+	@Nonnull
+	default Task<Collection<ChannelMessage>> sendQueryAsync() {
+		return getMessenger().sendMessageQueryAsync(this);
+	}
+
+	@Nonnull
+	default ChannelMessage sendSingeQuery() {
+		return getMessenger().sendSingleMessageQuery(this);
+	}
+
+	@Nonnull
+	default Task<ChannelMessage> sendSingleQueryAsync() {
+		return getMessenger().sendSingleMessageQueryAsync(this);
+	}
+
+	@Nonnull
+	@CheckReturnValue
+	Builder response();
+
+	interface Builder {
+
+		@Nonnull
+		@CheckReturnValue
+		Builder channel(@Nonnull String channel);
+
+		@Nonnull
+		@CheckReturnValue
+		Builder message(@Nonnull String message);
+
+		@Nonnull
+		@CheckReturnValue
+		Builder data(@Nonnull Consumer<? super Document> action);
+
+		@Nonnull
+		@CheckReturnValue
+		Builder data(@Nonnull Document document);
+
+		@Nonnull
+		@CheckReturnValue
+		Builder targetAll();
+
+		@Nonnull
+		@CheckReturnValue
+		Builder targetServices();
+
+		@Nonnull
+		@CheckReturnValue
+		Builder targetService(@Nonnull String name);
+
+		@Nonnull
+		@CheckReturnValue
+		Builder targetTask(@Nonnull String name);
+
+		@Nonnull
+		@CheckReturnValue
+		Builder targetNodes();
+
+		@Nonnull
+		@CheckReturnValue
+		Builder targetNode(@Nonnull String name);
+
+		@Nonnull
+		@CheckReturnValue
+		ChannelMessage build();
+
+	}
+
+}

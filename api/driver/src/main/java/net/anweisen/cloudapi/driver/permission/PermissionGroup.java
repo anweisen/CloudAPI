@@ -32,6 +32,9 @@ public interface PermissionGroup extends Permissible {
 	 * Requires the group to be updated via {@link net.anweisen.cloudapi.driver.permission.PermissionManager#updateGroup(PermissionGroup)}.
 	 *
 	 * @param defaultGroup if this group should be the default group
+	 *
+	 * @throws UnsupportedOperationException
+	 *         If the default group cannot be changed through code
 	 */
 	void setDefaultGroup(boolean defaultGroup);
 
