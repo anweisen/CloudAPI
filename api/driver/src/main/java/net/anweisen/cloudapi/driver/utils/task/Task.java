@@ -65,15 +65,15 @@ public interface Task<V> extends Future<V>, Callable<V> {
 	}
 
 	@Nonnull
-	default Task<V> addListeners(@Nonnull TaskListener<? super V>... listeners) {
-		for (TaskListener<? super V> listener : listeners)
+	default Task<V> addListeners(@Nonnull TaskListener<V>... listeners) {
+		for (TaskListener<V> listener : listeners)
 			addListener(listener);
 
 		return this;
 	}
 
 	@Nonnull
-	Task<V> addListener(@Nonnull TaskListener<? super V> listener);
+	Task<V> addListener(@Nonnull TaskListener<V> listener);
 
 	@Nonnull
 	<R> Task<R> map(@Nonnull Function<? super V, ? extends R> mapper);
@@ -81,6 +81,11 @@ public interface Task<V> extends Future<V>, Callable<V> {
 	@Nonnull
 	default <R> Task<R> mapExceptionally(@Nonnull ExceptionallyFunction<? super V, ? extends R> mapper) {
 		return map(mapper);
+	}
+
+	@Nonnull
+	default Task<Void> mapVoid() {
+		return map(v -> null);
 	}
 
 }
