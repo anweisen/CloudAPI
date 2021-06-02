@@ -15,12 +15,6 @@ public interface PermissionInfo extends Comparable<PermissionInfo> {
 	String getName();
 
 	/**
-	 * @throws UnsupportedOperationException
-	 *         If this cloud does not support permission name chaining
-	 */
-	void setName(@Nonnull String name);
-
-	/**
 	 * @return the potency of this permission or {@code 1} if this cloud does not support permission potencys
 	 */
 	int getPotency();
