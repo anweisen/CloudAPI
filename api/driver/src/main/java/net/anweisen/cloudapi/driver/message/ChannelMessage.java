@@ -7,7 +7,6 @@ import net.anweisen.utilities.commons.config.Document;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import java.util.Collection;
-import java.util.function.Consumer;
 
 /**
  * @author anweisen | https://github.com/anweisen
@@ -58,54 +57,6 @@ public interface ChannelMessage {
 
 	@Nonnull
 	@CheckReturnValue
-	Builder response();
-
-	interface Builder {
-
-		@Nonnull
-		@CheckReturnValue
-		Builder channel(@Nonnull String channel);
-
-		@Nonnull
-		@CheckReturnValue
-		Builder message(@Nonnull String message);
-
-		@Nonnull
-		@CheckReturnValue
-		Builder data(@Nonnull Consumer<? super Document> action);
-
-		@Nonnull
-		@CheckReturnValue
-		Builder data(@Nonnull Document document);
-
-		@Nonnull
-		@CheckReturnValue
-		Builder targetAll();
-
-		@Nonnull
-		@CheckReturnValue
-		Builder targetServices();
-
-		@Nonnull
-		@CheckReturnValue
-		Builder targetService(@Nonnull String name);
-
-		@Nonnull
-		@CheckReturnValue
-		Builder targetTask(@Nonnull String name);
-
-		@Nonnull
-		@CheckReturnValue
-		Builder targetNodes();
-
-		@Nonnull
-		@CheckReturnValue
-		Builder targetNode(@Nonnull String name);
-
-		@Nonnull
-		@CheckReturnValue
-		ChannelMessage build();
-
-	}
+	MessageBuilder response();
 
 }

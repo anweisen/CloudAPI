@@ -15,7 +15,7 @@ public interface CloudMessenger {
 
 	@Nonnull
 	@CheckReturnValue
-	ChannelMessage.Builder createMessage();
+	MessageBuilder createMessage();
 
 	/**
 	 * @param message the message to send
