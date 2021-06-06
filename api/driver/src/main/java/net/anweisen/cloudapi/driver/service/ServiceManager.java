@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  */
-public interface GeneralServiceManager {
+public interface ServiceManager {
 
 	@Nonnull
 	Collection<ServiceInfo> getServices();
@@ -21,7 +21,7 @@ public interface GeneralServiceManager {
 	Task<Collection<ServiceInfo>> getServicesAsync();
 
 	@Nonnull
-	Collection<UUID> getServiceUniqueIds();
+	Collection<UUID> getServiceUUIDs();
 
 	@Nonnull
 	Task<Collection<UUID>> getServiceUniqueIdsAsync();
@@ -82,9 +82,9 @@ public interface GeneralServiceManager {
 	Task<ServiceInfo> getServiceByNameAsync(@Nonnull String name);
 
 	@Nullable
-	ServiceInfo getServiceById(@Nonnull UUID id);
+	ServiceInfo getServiceById(@Nonnull UUID uuid);
 
 	@Nonnull
-	Task<ServiceInfo> getServiceByIdAsync(@Nonnull UUID id);
+	Task<ServiceInfo> getServiceByIdAsync(@Nonnull UUID uuid);
 
 }

@@ -12,25 +12,45 @@ public interface EventManager {
 	EventManager registerListener(@Nonnull Object listener);
 
 	@Nonnull
-	EventManager registerListeners(@Nonnull Object... listeners);
+	default EventManager registerListeners(@Nonnull Object... listeners) {
+		for (Object listener : listeners) {
+			registerListener(listener);
+		}
+
+		return this;
+	}
 
 	@Nonnull
 	EventManager unregisterListener(@Nonnull Object listener);
 
 	@Nonnull
-	EventManager unregisterListeners(@Nonnull Object... listeners);
+	default EventManager unregisterListeners(@Nonnull Object... listeners) {
+		for (Object listener : listeners) {
+			unregisterListener(listener);
+		}
+
+		return this;
+	}
 
 	@Nonnull
 	EventManager unregisterListener(@Nonnull Class<?> listenerClass);
 
 	@Nonnull
-	EventManager unregisterListeners(@Nonnull Class<?>... listenerClasses);
+	default EventManager unregisterListeners(@Nonnull Class<?>... listenerClasses) {
+		for (Class<?> listenerClass : listenerClasses) {
+			unregisterListener(listenerClass);
+		}
+
+		return this;
+	}
 
 	@Nonnull
 	EventManager unregisterListeners(@Nonnull ClassLoader loader);
 
 	@Nonnull
-	EventManager callEvent(@Nonnull Event event);
+	default EventManager callEvent(@Nonnull Event event) {
+		return callEvent("*", event);
+	}
 
 	/**
 	 * @param channel the channel to call the event on, will be ignored if not supported
