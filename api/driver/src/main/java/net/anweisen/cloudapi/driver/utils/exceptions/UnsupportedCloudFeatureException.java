@@ -1,12 +1,15 @@
 package net.anweisen.cloudapi.driver.utils.exceptions;
 
 import net.anweisen.cloudapi.driver.support.SupportFlag;
+import net.anweisen.utilities.commons.misc.ReflectionUtils;
 import net.anweisen.utilities.commons.misc.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
+ * This exception is thrown when a feature is accessed which is not supported by this cloud.
+ *
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  */
@@ -14,26 +17,23 @@ public class UnsupportedCloudFeatureException extends UnsupportedOperationExcept
 
 	private final SupportFlag flag;
 
-	public UnsupportedCloudFeatureException() {
-		super(getCaller());
+	public UnsupportedCloudFeatureException(int ignoreCaller, @Nullable SupportFlag flag) {
+		super(CallerNameResolver.resolve(ignoreCaller) + (flag != null ? " -> SupportFlag." + flag : ""));
 		this.flag = null;
 	}
 
+	public UnsupportedCloudFeatureException(int ignoreCaller) {
+		this(ignoreCaller + 1, null);
+	}
+
 	public UnsupportedCloudFeatureException(@Nullable SupportFlag flag) {
-		super(getCaller() + (flag != null ? " SupportFlag." + flag : ""));
-		this.flag = flag;
+		this(1, flag);
 	}
 
-	@Nonnull
-	private static String getCaller() {
-		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-		StackTraceElement element = trace[3];
-
-		String className = StringUtils.getAfterLastIndex(element.getClassName(), ".");
-		return className + "." + element.getMethodName();
+	public UnsupportedCloudFeatureException() {
+		this(1);
 	}
 
-	@Nullable
 	public SupportFlag getFlag() {
 		return flag;
 	}

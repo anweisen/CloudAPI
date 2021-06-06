@@ -14,12 +14,15 @@ public interface ServiceInfo {
 	ServiceId getServiceId();
 
 	@Nonnull
-	default String getName() {
-		return getServiceId().getName();
-	}
+	ServiceState getState();
 
 	@Nonnull
-	ServiceState getState();
+	ServiceType getType();
+
+	/**
+	 * @return if the service isset to invisible, always {@code false} if not supported
+	 */
+	boolean isInvisible();
 
 	/**
 	 * @return the pid of the process or {@code -1}
@@ -27,6 +30,8 @@ public interface ServiceInfo {
 	int getPid();
 
 	long getConnectedTime();
+
+	long getCreationTime();
 
 	@Nonnull
 	SpecificServiceManager getManager();

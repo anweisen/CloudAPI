@@ -1,6 +1,7 @@
 package net.anweisen.cloudapi.driver.permission;
 
 import net.anweisen.cloudapi.driver.permission.info.PermissionInfo;
+import net.anweisen.cloudapi.driver.utils.task.Task;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
@@ -15,6 +16,11 @@ import java.util.concurrent.TimeUnit;
  * @see PermissionGroup
  */
 public interface Permissible {
+
+	void update();
+
+	@Nonnull
+	Task<Void> updateAsync();
 
 	@Nonnull
 	String getName();
@@ -46,8 +52,7 @@ public interface Permissible {
 	boolean hasPermission(@Nonnull String taskGroup, @Nonnull PermissionInfo permission);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * The permission will be added with the default potency of the cloud and no timeout.
 	 *
@@ -56,8 +61,7 @@ public interface Permissible {
 	void addPermission(@Nonnull String permission);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * The permission will be added with the default potency of the cloud.
 	 *
@@ -71,8 +75,7 @@ public interface Permissible {
 	void addPermission(@Nonnull String permission, long time, @Nonnull TimeUnit unit);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * The permission will be added with no timeout, if supported.
 	 *
@@ -82,8 +85,7 @@ public interface Permissible {
 	void addPermission(@Nonnull String permission, int potency);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * @param permission the permission to add
 	 * @param potency the potency of the permission, will be ignored if this cloud does not support permission potencys
@@ -96,16 +98,14 @@ public interface Permissible {
 	void addPermission(@Nonnull String permission, int potency, long time, @Nonnull TimeUnit unit);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * @param permission the permission to add
 	 */
 	void addPermission(@Nonnull PermissionInfo permission);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * The permission will be added with the default potency of the cloud and no timeout.
 	 *
@@ -118,8 +118,7 @@ public interface Permissible {
 	void addPermission(@Nonnull String taskGroup, @Nonnull String permission);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * The permission will be added with the default potency of the cloud.
 	 *
@@ -134,8 +133,7 @@ public interface Permissible {
 	void addPermission(@Nonnull String taskGroup, @Nonnull String permission, long time, @Nonnull TimeUnit unit);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * The permission will be added with no timeout, if supported.
 	 *
@@ -149,8 +147,7 @@ public interface Permissible {
 	void addPermission(@Nonnull String taskGroup, @Nonnull String permission, int potency);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * @param taskGroup the group on which the permission should be granted, eg Lobby
 	 * @param permission the permission to add
@@ -165,8 +162,7 @@ public interface Permissible {
 	void addPermission(@Nonnull String taskGroup, @Nonnull String permission, int potency, long time, @Nonnull TimeUnit unit);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * @param permission the permission to remove
 	 * @return {@code true} if the permission was removed successfully, {@code false} if the given permission was not set
@@ -174,8 +170,7 @@ public interface Permissible {
 	boolean removePermission(@Nonnull String permission);
 
 	/**
-	 * Requires the permissible to be updated via {@link PermissionManager#updateGroup(PermissionGroup)}
-	 * or {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the permissible to be updated via {@link #update()}.
 	 *
 	 * @param taskGroup the group on which the permission should be removed, eg Lobby
 	 * @param permission the permission to remove

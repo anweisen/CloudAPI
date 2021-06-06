@@ -1,5 +1,8 @@
 package net.anweisen.cloudapi.driver.permission;
 
+import net.anweisen.cloudapi.driver.CloudDriver;
+import net.anweisen.cloudapi.driver.utils.task.Task;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -7,6 +10,17 @@ import javax.annotation.Nonnull;
  * @since 1.0
  */
 public interface PermissionGroup extends Permissible {
+
+	@Override
+	default void update() {
+		CloudDriver.getInstance().getPermissionManager().updateGroup(this);
+	}
+
+	@Nonnull
+	@Override
+	default Task<Void> updateAsync() {
+		return CloudDriver.getInstance().getPermissionManager().updateGroupAsync(this);
+	}
 
 	/**
 	 * @return the sortId of this group

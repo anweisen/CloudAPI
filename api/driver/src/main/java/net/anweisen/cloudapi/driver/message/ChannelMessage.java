@@ -6,6 +6,7 @@ import net.anweisen.utilities.commons.config.Document;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Collection;
 
 /**
@@ -45,7 +46,7 @@ public interface ChannelMessage {
 		return getMessenger().sendMessageQueryAsync(this);
 	}
 
-	@Nonnull
+	@Nullable
 	default ChannelMessage sendSingeQuery() {
 		return getMessenger().sendSingleMessageQuery(this);
 	}

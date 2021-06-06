@@ -15,6 +15,11 @@ import java.util.function.Function;
 public interface Task<V> extends Future<V>, Callable<V> {
 
 	@Nonnull
+	default Task<V> onComplete(@Nonnull Runnable action) {
+		return onComplete(v -> action.run());
+	}
+
+	@Nonnull
 	default Task<V> onComplete(@Nonnull Consumer<? super V> action) {
 		return onComplete((task, value) -> action.accept(value));
 	}
@@ -27,6 +32,11 @@ public interface Task<V> extends Future<V>, Callable<V> {
 				action.accept(task, value);
 			}
 		});
+	}
+
+	@Nonnull
+	default Task<V> onFailure(@Nonnull Runnable action) {
+		return onFailure(ex -> action.run());
 	}
 
 	@Nonnull
@@ -60,7 +70,7 @@ public interface Task<V> extends Future<V>, Callable<V> {
 	}
 
 	@Nonnull
-	default Task<V> fireExceptionOnFailure() {
+	default Task<V> throwOnFailure() {
 		return onFailure(ex -> ex.printStackTrace());
 	}
 
@@ -77,6 +87,8 @@ public interface Task<V> extends Future<V>, Callable<V> {
 
 	@Nonnull
 	<R> Task<R> map(@Nonnull Function<? super V, ? extends R> mapper);
+
+	V get(long timeout, @Nonnull TimeUnit unit, V def);
 
 	@Nonnull
 	default <R> Task<R> mapExceptionally(@Nonnull ExceptionallyFunction<? super V, ? extends R> mapper) {

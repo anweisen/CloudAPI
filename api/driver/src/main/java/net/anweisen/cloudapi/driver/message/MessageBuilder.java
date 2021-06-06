@@ -1,5 +1,6 @@
 package net.anweisen.cloudapi.driver.message;
 
+import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.utilities.commons.config.Document;
 
 import javax.annotation.CheckReturnValue;
@@ -51,6 +52,17 @@ public interface MessageBuilder {
 	@Nonnull
 	@CheckReturnValue
 	MessageBuilder targetNode(@Nonnull String name);
+
+	@Nonnull
+	@CheckReturnValue
+	default MessageBuilder targetLocalNode() {
+		return targetNode(CloudDriver.getInstance().getNodeName());
+	}
+
+	@Nonnull
+	default CloudMessenger getMessenger() {
+		return CloudDriver.getInstance().getMessenger();
+	}
 
 	@Nonnull
 	@CheckReturnValue

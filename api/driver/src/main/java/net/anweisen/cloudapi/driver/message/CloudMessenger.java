@@ -5,6 +5,7 @@ import net.anweisen.utilities.commons.config.Document;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Collection;
 
 /**
@@ -41,13 +42,13 @@ public interface CloudMessenger {
 	/**
 	 * Sends a channel message and waits for the first response.
 	 *
-	 * @param message the message to send
+	 * @param message the message to send or {@code null} if no one responded
 	 * @return the first response received
 	 *
 	 * @throws UnsupportedOperationException
 	 *         If this cloud does not support query message responses
 	 */
-	@Nonnull
+	@Nullable
 	ChannelMessage sendSingleMessageQuery(@Nonnull ChannelMessage message);
 
 	/**
@@ -61,7 +62,7 @@ public interface CloudMessenger {
 	 * @throws UnsupportedOperationException
 	 *         If this cloud does not support query message responses
 	 */
-	@Nonnull
+	@Nullable
 	default ChannelMessage sendSingleMessageQuery(@Nonnull String channel, @Nonnull String message, @Nonnull Document data) {
 		ChannelMessage channelMessage = createMessage().channel(channel).message(message).data(data).build();
 		return sendSingleMessageQuery(channelMessage);
@@ -152,5 +153,13 @@ public interface CloudMessenger {
 		ChannelMessage channelMessage = createMessage().channel(channel).message(message).data(data).build();
 		return sendMessageQueryAsync(channelMessage);
 	}
+
+	/**
+	 * Registers the given channels to be listened on, nothing if not required
+	 *
+	 * @param channelNames the channels on which we should listen on for messages
+	 */
+	@Nonnull
+	CloudMessenger listenChannel(@Nonnull String... channelNames);
 
 }

@@ -16,41 +16,46 @@ import java.util.Collection;
 public interface ServiceTaskManager {
 
 	/**
-	 * Reloads all tasks
+	 * Reloads all tasks, nothing if unsupported
 	 */
 	void reload();
 
 	/**
-	 * Reloads all tasks
+	 * Reloads all tasks, nothing if unsupported
 	 */
 	@Nonnull
 	Task<Void> reloadAsync();
 
 	@Nonnull
-	Collection<ServiceTask> getPermanentServiceTasks();
+	Collection<ServiceTask> getTasks();
 
 	@Nonnull
-	Task<Collection<ServiceTask>> getPermanentServiceTasksAsync();
+	Task<Collection<ServiceTask>> getTasksAsync();
 
 	@Nullable
-	ServiceTask getServiceTask(@Nonnull String name);
+	ServiceTask getTask(@Nonnull String name);
 
 	@Nonnull
-	Task<ServiceTask> getServiceTaskAsync(@Nonnull String name);
+	Task<ServiceTask> getTaskAsync(@Nonnull String name);
 
-	boolean isServiceTaskPresent(@Nonnull String name);
-
-	@Nonnull
-	Task<Boolean> isServiceTaskPresentAsync(@Nonnull String name);
-
-	void addPermanentServiceTask(@Nonnull ServiceTask task);
+	boolean containsTask(@Nonnull String name);
 
 	@Nonnull
-	Task<Void> addPermanentServiceTaskAsync(@Nonnull ServiceTask task);
+	Task<Boolean> containsTaskAsync(@Nonnull String name);
 
-	void removePermanentServiceTask(@Nonnull ServiceTask task);
+	void addTask(@Nonnull ServiceTask task);
 
 	@Nonnull
-	Task<Void> removePermanentServiceTaskAsync(@Nonnull ServiceTask task);
+	Task<Void> addTaskAsync(@Nonnull ServiceTask task);
+
+	void removeTask(@Nonnull ServiceTask task);
+
+	@Nonnull
+	Task<Void> removeTaskAsync(@Nonnull ServiceTask task);
+
+	void removeTask(@Nonnull String name);
+
+	@Nonnull
+	Task<Void> removeTaskAsync(@Nonnull String name);
 
 }

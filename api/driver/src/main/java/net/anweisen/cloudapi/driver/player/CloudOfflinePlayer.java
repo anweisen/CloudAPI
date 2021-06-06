@@ -1,5 +1,6 @@
 package net.anweisen.cloudapi.driver.player;
 
+import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.utilities.commons.config.Document;
 
 import javax.annotation.Nonnull;
@@ -9,7 +10,7 @@ import java.util.UUID;
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  */
-public interface OfflineCloudPlayer {
+public interface CloudOfflinePlayer {
 
 	@Nonnull
 	UUID getUniqueId();
@@ -28,5 +29,9 @@ public interface OfflineCloudPlayer {
 	long getFirstLoginTimeMillis();
 
 	long getLastLoginTimeMillis();
+
+	default void update() {
+		CloudDriver.getInstance().getPlayerManager().updateOfflinePlayer(this);
+	}
 
 }

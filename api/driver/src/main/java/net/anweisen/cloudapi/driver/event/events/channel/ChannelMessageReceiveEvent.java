@@ -1,6 +1,7 @@
 package net.anweisen.cloudapi.driver.event.events.channel;
 
-import net.anweisen.cloudapi.driver.event.events.DriverEvent;
+import net.anweisen.cloudapi.driver.event.Event;
+
 import net.anweisen.cloudapi.driver.message.ChannelMessage;
 import net.anweisen.cloudapi.driver.message.CloudMessenger;
 import net.anweisen.utilities.commons.config.Document;
@@ -11,7 +12,7 @@ import javax.annotation.Nonnull;
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  */
-public final class ChannelMessageReceiveEvent extends DriverEvent {
+public final class ChannelMessageReceiveEvent implements Event {
 
 	private final ChannelMessage message;
 

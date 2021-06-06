@@ -32,7 +32,7 @@ public interface CloudDriver {
 	SupportInfo getSupportInfo();
 
 	/**
-	 * @return the name of the component the driver is running on, either on a cloud service or a node, eg Lobby-1 or Node-1
+	 * @return the name of the component the driver is running on, either on a cloud service or a node, eg Master/Manager, Lobby-1, Node-1/Wrapper-1/Slave-1
 	 */
 	@Nonnull
 	String getComponentName();
@@ -43,7 +43,12 @@ public interface CloudDriver {
 	@Nonnull
 	String getNodeName();
 
+	/**
+	 * @deprecated only a few clouds support database apis for the wrapper and the implementation is not very handy, may behave incorrect
+	 *             may implement an own connection/implementation here later?
+	 */
 	@Nonnull
+	@Deprecated
 	DatabaseProvider getDatabaseProvider();
 
 	@Nonnull
@@ -59,7 +64,7 @@ public interface CloudDriver {
 	PlayerManager getPlayerManager();
 
 	@Nonnull
-	GeneralServiceManager getServiceManager();
+	ServiceManager getServiceManager();
 
 	@Nonnull
 	ServiceFactory getServiceFactory();
@@ -68,11 +73,11 @@ public interface CloudDriver {
 	ServiceTaskManager getTaskManager();
 
 	static CloudDriver getInstance() {
-		return Holder.instance;
+		return InstanceHolder.instance;
 	}
 
 	static void setInstance(@Nonnull CloudDriver instance) {
-		if (instance == null) throw new NullPointerException();
-		Holder.instance = instance;
+		if (instance == null) throw new NullPointerException("Cannot set instance to null");
+		InstanceHolder.instance = instance;
 	}
 }

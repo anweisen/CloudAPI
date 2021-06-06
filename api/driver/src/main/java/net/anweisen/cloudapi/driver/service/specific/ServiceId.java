@@ -13,6 +13,9 @@ public interface ServiceId {
 	String getName();
 
 	@Nonnull
+	String getTaskName();
+
+	@Nonnull
 	UUID getUniqueId();
 
 	int getServiceTaskId();

@@ -1,6 +1,6 @@
 package net.anweisen.cloudapi.driver.service.specific;
 
-import net.anweisen.cloudapi.driver.service.GeneralServiceManager;
+import net.anweisen.cloudapi.driver.service.ServiceManager;
 import net.anweisen.cloudapi.driver.utils.task.Task;
 
 import javax.annotation.Nonnull;
@@ -14,7 +14,7 @@ import java.util.Queue;
  * @since 1.0
  *
  * @see ServiceInfo
- * @see GeneralServiceManager
+ * @see ServiceManager
  */
 public interface SpecificServiceManager {
 

@@ -1,5 +1,7 @@
 package net.anweisen.cloudapi.driver.permission;
 
+import net.anweisen.cloudapi.driver.utils.task.Task;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
@@ -13,17 +15,28 @@ import java.util.UUID;
 public interface PermissionManager {
 
 	/**
+	 * Reloads the permission manager or nothing if not supported
+	 */
+	void reload();
+
+	/**
 	 * @return all users registered
 	 */
 	@Nonnull
 	Collection<PermissionUser> getUsers();
+
+	@Nonnull
+	Task<Collection<PermissionUser>> getUsersAsync();
 
 	/**
 	 * @param group the name of the group, may be case-sensitive, depending on the cloud
 	 * @return all users with the given group
 	 */
 	@Nonnull
-	Collection<PermissionUser> getUsersWWithGroup(@Nonnull String group);
+	Collection<PermissionUser> getUsersWithGroup(@Nonnull String group);
+
+	@Nonnull
+	Task<Collection<PermissionUser>> getUsersWithGroupAsync(@Nonnull String group);
 
 	/**
 	 * @param name the name of the users, may be case-sensitive, depending on the cloud
@@ -32,6 +45,9 @@ public interface PermissionManager {
 	@Nonnull
 	List<PermissionUser> getUsers(@Nonnull String name);
 
+	@Nonnull
+	Task<List<PermissionUser>> getUsersAsync(@Nonnull String name);
+
 	/**
 	 * @param name the name of the user, may be case-sensitive, depending on the cloud
 	 * @return the first user found, {@code null} if no user was found
@@ -39,12 +55,18 @@ public interface PermissionManager {
 	@Nullable
 	PermissionUser getFirstUser(@Nonnull String name);
 
+	@Nonnull
+	Task<PermissionUser> getFirstUserAsync(@Nonnull String name);
+
 	/**
 	 * @param uniqueId the uuid of the user
 	 * @return the user found, {@code null} if no user was found
 	 */
 	@Nullable
 	PermissionUser getUser(@Nonnull UUID uniqueId);
+
+	@Nonnull
+	Task<PermissionUser> getUserAsync(@Nonnull UUID uniqueId);
 
 	/**
 	 * Depending on the cloud, a new user may be created,
@@ -54,6 +76,9 @@ public interface PermissionManager {
 	 */
 	void updateUser(@Nonnull PermissionUser user);
 
+	@Nonnull
+	Task<Void> updateUserAsync(@Nonnull PermissionUser user);
+
 	/**
 	 * Deletes one user or all users, depending on the cloud, matching the given name.
 	 * This method may be case-sensitive, depending on the cloud.
@@ -62,6 +87,9 @@ public interface PermissionManager {
 	 */
 	void deleteUser(@Nonnull String name);
 
+	@Nonnull
+	Task<Void> deleteUserAsync(@Nonnull String name);
+
 	/**
 	 * Deletes one user or all users, depending on the cloud, matching the {@link PermissionUser#getUniqueId() uniqueId} of the user.
 	 *
@@ -69,12 +97,21 @@ public interface PermissionManager {
 	 */
 	void deleteUser(@Nonnull PermissionUser user);
 
+	@Nonnull
+	Task<Void> deleteUserAsync(@Nonnull PermissionUser user);
+
 	/**
 	 * @param user the user to get the groups of
 	 * @return the groups of the user, may contain the {@link #getDefaultGroup() default group} depending on the cloud
 	 */
 	@Nonnull
 	Collection<PermissionGroup> getUserGroups(@Nonnull PermissionUser user);
+
+	@Nonnull
+	Collection<PermissionGroup> getGroups();
+
+	@Nonnull
+	Task<Collection<PermissionGroup>> getGroupsAsync();
 
 	/**
 	 * @param user the user to get the highest group from
@@ -87,6 +124,9 @@ public interface PermissionManager {
 	 */
 	PermissionGroup getDefaultGroup();
 
+	@Nonnull
+	Task<PermissionGroup> getDefaultGroupAsync();
+
 	/**
 	 * Depending on the cloud, a new group may be created,
 	 * if no group existed matching the {@link PermissionGroup#getName() name} of the group.
@@ -94,6 +134,9 @@ public interface PermissionManager {
 	 * @param group the group to update
 	 */
 	void updateGroup(@Nonnull PermissionGroup group);
+
+	@Nonnull
+	Task<Void> updateGroupAsync(@Nonnull PermissionGroup group);
 
 	/**
 	 * Deletes one group or all groups, depending on the cloud, matching the given name.
@@ -103,11 +146,17 @@ public interface PermissionManager {
 	 */
 	void deleteGroup(@Nonnull String name);
 
+	@Nonnull
+	Task<Void> deleteGroupAsync(@Nonnull String name);
+
 	/**
 	 * Deletes one group or all groups, depending on the cloud, matching the given name.
 	 *
 	 * @param group the group to delete
 	 */
 	void deleteGroup(@Nonnull PermissionGroup group);
+
+	@Nonnull
+	Task<Void> deleteGroupAsync(@Nonnull PermissionGroup group);;
 
 }

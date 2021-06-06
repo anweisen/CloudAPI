@@ -1,5 +1,7 @@
 package net.anweisen.cloudapi.driver.support;
 
+import net.anweisen.cloudapi.driver.utils.exceptions.UnsupportedCloudFeatureException;
+
 import javax.annotation.Nonnull;
 import java.util.*;
 
@@ -50,6 +52,31 @@ public final class SupportInfo {
 				return true;
 		}
 		return false;
+	}
+
+	public void require(@Nonnull SupportFlag flag) {
+		if (!supports(flag))
+			throw new UnsupportedCloudFeatureException(1, flag);
+	}
+
+	public void requireAll(@Nonnull SupportFlag... flags) {
+		if (!supportsAll(flags))
+			throw new UnsupportedCloudFeatureException(1);
+	}
+
+	public void requireAll(@Nonnull Collection<? extends SupportFlag> flags) {
+		if (!supportsAll(flags))
+			throw new UnsupportedCloudFeatureException(1);
+	}
+
+	public void requireAny(@Nonnull SupportFlag... flags) {
+		if (!supportsAny(flags))
+			throw new UnsupportedCloudFeatureException(1);
+	}
+
+	public void requireAny(@Nonnull Collection<? extends SupportFlag> flags) {
+		if (!supportsAny(flags))
+			throw new UnsupportedCloudFeatureException(1);
 	}
 
 }

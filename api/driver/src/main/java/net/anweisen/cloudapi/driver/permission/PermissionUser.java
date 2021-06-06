@@ -1,6 +1,8 @@
 package net.anweisen.cloudapi.driver.permission;
 
+import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.cloudapi.driver.permission.info.PermissionUserGroupInfo;
+import net.anweisen.cloudapi.driver.utils.task.Task;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
@@ -12,6 +14,17 @@ import java.util.concurrent.TimeUnit;
  * @since 1.0
  */
 public interface PermissionUser extends Permissible {
+
+	@Override
+	default void update() {
+		CloudDriver.getInstance().getPermissionManager().updateUser(this);
+	}
+
+	@Nonnull
+	@Override
+	default Task<Void> updateAsync() {
+		return CloudDriver.getInstance().getPermissionManager().updateUserAsync(this);
+	}
 
 	@Nonnull
 	UUID getUniqueId();
