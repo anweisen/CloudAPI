@@ -12,9 +12,6 @@ public interface ServiceTemplate {
 	String getName();
 
 	@Nonnull
-	String getStorage();
-
-	@Nonnull
 	String getPrefix();
 
 	@Nonnull

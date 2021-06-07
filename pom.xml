@@ -10,6 +10,12 @@
 	<packaging>pom</packaging>
 	<url>https://github.com/anweisen/CloudAPI</url>
 
+	<properties>
+		<utilities.version>1.2.7</utilities.version>
+		<spigot.version>1.16.5-R0.1-SNAPSHOT</spigot.version>
+		<bungee.version>1.16-R0.5-SNAPSHOT</bungee.version>
+	</properties>
+
 	<modules>
 		<module>api</module>
 	</modules>

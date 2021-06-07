@@ -22,7 +22,7 @@
 
 		<dependency>
 			<groupId>net.anweisen.cloudapi</groupId>
-			<artifactId>driver-api</artifactId>
+			<artifactId>api-driver</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

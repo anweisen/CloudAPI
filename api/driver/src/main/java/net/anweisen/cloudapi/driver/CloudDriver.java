@@ -3,12 +3,15 @@ package net.anweisen.cloudapi.driver;
 import net.anweisen.cloudapi.driver.database.DatabaseProvider;
 import net.anweisen.cloudapi.driver.event.EventManager;
 import net.anweisen.cloudapi.driver.message.CloudMessenger;
+import net.anweisen.cloudapi.driver.node.NodeInfo;
+import net.anweisen.cloudapi.driver.node.NodeManager;
 import net.anweisen.cloudapi.driver.permission.PermissionManager;
 import net.anweisen.cloudapi.driver.player.PlayerManager;
-import net.anweisen.cloudapi.driver.service.GeneralServiceManager;
+import net.anweisen.cloudapi.driver.service.ServiceManager;
 import net.anweisen.cloudapi.driver.service.ServiceFactory;
 import net.anweisen.cloudapi.driver.service.ServiceTaskManager;
 import net.anweisen.cloudapi.driver.support.SupportInfo;
+import net.anweisen.utilities.commons.logging.ILogger;
 
 import javax.annotation.Nonnull;
 
@@ -26,22 +29,25 @@ import javax.annotation.Nonnull;
 public interface CloudDriver {
 
 	@Nonnull
+	ILogger getLogger();
+
+	@Nonnull
 	CloudEnvironment getEnvironment();
 
 	@Nonnull
 	SupportInfo getSupportInfo();
 
 	/**
-	 * @return the name of the component the driver is running on, either on a cloud service or a node, eg Master/Manager, Lobby-1, Node-1/Wrapper-1/Slave-1
+	 * @return the name of the component the driver is running on (either a cloud service or a node), eg Master/Manager, Lobby-1, Node-1/Wrapper-1/Slave-1
 	 */
 	@Nonnull
 	String getComponentName();
 
-	/**
-	 * @return the name of this node, depends on the cloud and config
-	 */
 	@Nonnull
-	String getNodeName();
+	NodeInfo getNode();
+
+	@Nonnull
+	NodeManager getNodeManager();
 
 	/**
 	 * @deprecated only a few clouds support database apis for the wrapper and the implementation is not very handy, may behave incorrect

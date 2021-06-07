@@ -1,8 +1,11 @@
 package net.anweisen.cloudapi.driver.service.specific;
 
+import net.anweisen.cloudapi.driver.node.NodeInfo;
+import net.anweisen.cloudapi.driver.service.config.ServiceTask;
 import net.anweisen.utilities.commons.config.Document;
 
 import javax.annotation.Nonnull;
+import java.util.UUID;
 
 /**
  * @author anweisen | https://github.com/anweisen
@@ -11,7 +14,21 @@ import javax.annotation.Nonnull;
 public interface ServiceInfo {
 
 	@Nonnull
-	ServiceId getServiceId();
+	UUID getUniqueId();
+
+	@Nonnull
+	String getName();
+
+	/**
+	 * @return the id of the service inside of the task, eg 2 for Lobby-2
+	 */
+	int getServiceTaskId();
+
+	@Nonnull
+	ServiceTask getTask();
+
+	@Nonnull
+	NodeInfo getNode();
 
 	@Nonnull
 	ServiceState getState();
@@ -24,17 +41,8 @@ public interface ServiceInfo {
 	 */
 	boolean isInvisible();
 
-	/**
-	 * @return the pid of the process or {@code -1}
-	 */
-	int getPid();
-
-	long getConnectedTime();
-
-	long getCreationTime();
-
 	@Nonnull
-	SpecificServiceManager getManager();
+	ServiceController getController();
 
 	@Nonnull
 	Document getProperties();

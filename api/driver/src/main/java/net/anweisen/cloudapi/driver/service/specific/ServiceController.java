@@ -8,15 +8,13 @@ import javax.annotation.Nullable;
 import java.util.Queue;
 
 /**
- * Manages a service.
- *
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  *
  * @see ServiceInfo
  * @see ServiceManager
  */
-public interface SpecificServiceManager {
+public interface ServiceController {
 
 	/**
 	 * @return the info or {@code null} if the service is not connected, depends on cloud
