@@ -1,8 +1,9 @@
 package net.anweisen.cloudapi.driver.service.specific;
 
+import net.anweisen.cloudapi.driver.component.NetworkComponent;
 import net.anweisen.cloudapi.driver.node.NodeInfo;
 import net.anweisen.cloudapi.driver.service.config.ServiceTask;
-import net.anweisen.utilities.commons.config.Document;
+import net.anweisen.utilities.common.config.Document;
 
 import javax.annotation.Nonnull;
 import java.util.UUID;
@@ -11,7 +12,7 @@ import java.util.UUID;
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  */
-public interface ServiceInfo {
+public interface ServiceInfo extends NetworkComponent {
 
 	@Nonnull
 	UUID getUniqueId();
@@ -19,10 +20,12 @@ public interface ServiceInfo {
 	@Nonnull
 	String getName();
 
+	int getPort();
+
 	/**
 	 * @return the id of the service inside of the task, eg 2 for Lobby-2
 	 */
-	int getServiceTaskId();
+	int getServiceNumber();
 
 	@Nonnull
 	ServiceTask getTask();

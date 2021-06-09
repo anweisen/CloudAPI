@@ -1,10 +1,10 @@
-package net.anweisen.cloudapi.simplecloud.wrapper;
+package net.anweisen.cloudapi.wrapper;
 
 import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.cloudapi.driver.CloudEnvironment;
-import net.anweisen.cloudapi.driver.service.specific.ServiceId;
+import net.anweisen.cloudapi.driver.component.NetworkComponent;
 import net.anweisen.cloudapi.driver.service.specific.ServiceInfo;
-import net.anweisen.utilities.commons.logging.ILogger;
+import net.anweisen.utilities.common.logging.ILogger;
 
 import javax.annotation.Nonnull;
 
@@ -31,7 +31,10 @@ public interface CloudWrapper extends CloudDriver {
 	}
 
 	@Nonnull
-	ServiceId getServiceId();
+	@Override
+	default NetworkComponent getComponent() {
+		return getCurrentServiceInfo();
+	}
 
 	@Nonnull
 	ServiceInfo getCurrentServiceInfo();

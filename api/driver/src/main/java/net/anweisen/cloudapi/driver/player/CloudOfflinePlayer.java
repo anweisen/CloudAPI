@@ -1,7 +1,7 @@
 package net.anweisen.cloudapi.driver.player;
 
 import net.anweisen.cloudapi.driver.CloudDriver;
-import net.anweisen.utilities.commons.config.Document;
+import net.anweisen.utilities.common.config.Document;
 
 import javax.annotation.Nonnull;
 import java.util.UUID;

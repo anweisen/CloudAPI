@@ -1,6 +1,6 @@
 package net.anweisen.cloudapi.driver.permission;
 
-import net.anweisen.cloudapi.driver.utils.task.Task;
+import net.anweisen.utilities.common.concurrent.task.Task;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -28,12 +28,6 @@
 
 		<dependency>
 			<groupId>net.anweisen.utilities</groupId>
-			<artifactId>common-utils</artifactId>
-			<version>${utilities.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.anweisen.utilities</groupId>
 			<artifactId>database-api</artifactId>
 			<version>${utilities.version}</version>
 		</dependency>

@@ -1,8 +1,8 @@
 package net.anweisen.cloudapi.driver.message;
 
 import net.anweisen.cloudapi.driver.CloudDriver;
-import net.anweisen.cloudapi.driver.utils.task.Task;
-import net.anweisen.utilities.commons.config.Document;
+import net.anweisen.utilities.common.concurrent.task.Task;
+import net.anweisen.utilities.common.config.Document;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;

@@ -1,12 +1,15 @@
 package net.anweisen.cloudapi.driver.message;
 
-import net.anweisen.cloudapi.driver.utils.task.Task;
-import net.anweisen.utilities.commons.config.Document;
+import net.anweisen.cloudapi.driver.CloudDriver;
+import net.anweisen.cloudapi.driver.event.events.channel.ChannelMessageReceiveEvent;
+import net.anweisen.utilities.common.concurrent.task.Task;
+import net.anweisen.utilities.common.config.Document;
 
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
+import java.util.function.Consumer;
 
 /**
  * @author anweisen | https://github.com/anweisen
@@ -160,6 +163,12 @@ public interface CloudMessenger {
 	 * @param channelNames the channels on which we should listen on for messages
 	 */
 	@Nonnull
-	CloudMessenger listenChannel(@Nonnull String... channelNames);
+	CloudMessenger registerChannel(@Nonnull String... channelNames);
+
+	@Nonnull
+	default CloudMessenger listenChannel(@Nonnull String channel, @Nonnull Consumer<ChannelMessageReceiveEvent> action) {
+		CloudDriver.getInstance().getEventManager().addListener(channel, ChannelMessageReceiveEvent.class, action);
+		return registerChannel(channel);
+	}
 
 }

@@ -1,6 +1,6 @@
 package net.anweisen.cloudapi.driver.service.config;
 
-import net.anweisen.utilities.commons.config.Document;
+import net.anweisen.utilities.common.config.Document;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
@@ -43,9 +43,6 @@ public interface ServiceTask {
 
 	@Nonnull
 	Collection<String> getNodes();
-
-	@Nonnull
-	Collection<String> getGroups();
 
 	@Nonnull
 	Collection<ServiceTemplate> getTemplates();

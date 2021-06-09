@@ -1,5 +1,6 @@
 package net.anweisen.cloudapi.driver;
 
+import net.anweisen.cloudapi.driver.component.NetworkComponent;
 import net.anweisen.cloudapi.driver.database.DatabaseProvider;
 import net.anweisen.cloudapi.driver.event.EventManager;
 import net.anweisen.cloudapi.driver.message.CloudMessenger;
@@ -11,7 +12,7 @@ import net.anweisen.cloudapi.driver.service.ServiceManager;
 import net.anweisen.cloudapi.driver.service.ServiceFactory;
 import net.anweisen.cloudapi.driver.service.ServiceTaskManager;
 import net.anweisen.cloudapi.driver.support.SupportInfo;
-import net.anweisen.utilities.commons.logging.ILogger;
+import net.anweisen.utilities.common.logging.ILogger;
 
 import javax.annotation.Nonnull;
 
@@ -38,10 +39,10 @@ public interface CloudDriver {
 	SupportInfo getSupportInfo();
 
 	/**
-	 * @return the name of the component the driver is running on (either a cloud service or a node), eg Master/Manager, Lobby-1, Node-1/Wrapper-1/Slave-1
+	 * @return either the service this wrapper is running on or the node of the cloud
 	 */
 	@Nonnull
-	String getComponentName();
+	NetworkComponent getComponent();
 
 	@Nonnull
 	NodeInfo getNode();

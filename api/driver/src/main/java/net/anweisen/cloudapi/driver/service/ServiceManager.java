@@ -1,7 +1,7 @@
 package net.anweisen.cloudapi.driver.service;
 
 import net.anweisen.cloudapi.driver.service.specific.ServiceInfo;
-import net.anweisen.cloudapi.driver.utils.task.Task;
+import net.anweisen.utilities.common.concurrent.task.Task;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

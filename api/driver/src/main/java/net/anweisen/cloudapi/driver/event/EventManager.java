@@ -1,12 +1,19 @@
 package net.anweisen.cloudapi.driver.event;
 
 import javax.annotation.Nonnull;
+import java.util.function.Consumer;
 
 /**
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  */
 public interface EventManager {
+
+	@Nonnull
+	EventManager addListener(@Nonnull String channel, @Nonnull RegisteredListener listener);
+
+	@Nonnull
+	<E extends Event> EventManager addListener(@Nonnull String channel, @Nonnull Class<E> eventClass, @Nonnull Consumer<? super E> action);
 
 	@Nonnull
 	EventManager registerListener(@Nonnull Object listener);
@@ -46,6 +53,9 @@ public interface EventManager {
 
 	@Nonnull
 	EventManager unregisterListeners(@Nonnull ClassLoader loader);
+
+	@EventListener
+	EventManager unregisterAll();
 
 	@Nonnull
 	default EventManager callEvent(@Nonnull Event event) {
