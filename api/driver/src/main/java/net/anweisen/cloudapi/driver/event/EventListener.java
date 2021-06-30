@@ -20,4 +20,14 @@ public @interface EventListener {
 	@Nonnull
 	String channel() default "*";
 
+	/**
+	 * @return whether this listener should not be called when the event was cancelled
+	 *
+	 * @see Cancelable#isCancelled()
+	 */
+	boolean ignoreCancelled() default false;
+
+	@Nonnull
+	EventPriority priority() default EventPriority.NORMAL;
+
 }

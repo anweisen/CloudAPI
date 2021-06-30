@@ -5,6 +5,9 @@ import javax.annotation.Nonnull;
 /**
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
+ *
+ * @see EventManager
+ * @see EventManager#addListener(String, RegisteredListener)
  */
 public interface RegisteredListener {
 
@@ -12,6 +15,11 @@ public interface RegisteredListener {
 
 	@Nonnull
 	Class<? extends Event> getEventClass();
+
+	@Nonnull
+	EventPriority getPriority();
+
+	boolean getIgnoreCancelled();
 
 	@Nonnull
 	Object getHolder();
