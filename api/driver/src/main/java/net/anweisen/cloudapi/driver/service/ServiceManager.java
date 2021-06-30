@@ -38,20 +38,6 @@ public interface ServiceManager {
 	@Nonnull
 	Task<Collection<ServiceInfo>> getServicesByTaskAsync(@Nonnull String taskName);
 
-	/**
-	 * @throws UnsupportedOperationException
-	 *         If this cloud does not have a group system
-	 */
-	@Nonnull
-	Collection<ServiceInfo> getServicesByGroup(@Nonnull String groupName);
-
-	/**
-	 * @throws UnsupportedOperationException
-	 *         If this cloud does not have a group system
-	 */
-	@Nonnull
-	Task<Collection<ServiceInfo>> getServicesByGroupAsync(@Nonnull String groupName);
-
 	int getServiceCount();
 
 	@Nonnull
@@ -61,19 +47,6 @@ public interface ServiceManager {
 
 	@Nonnull
 	Task<Integer> getServiceCountByTaskAsync(@Nonnull String taskName);
-
-	/**
-	 * @throws UnsupportedOperationException
-	 *         If this cloud does not have a group system
-	 */
-	int getServiceCountByGroup(@Nonnull String groupName);
-
-	/**
-	 * @throws UnsupportedOperationException
-	 *         If this cloud does not have a group system
-	 */
-	@Nonnull
-	Task<Integer> getServiceCountByGroupAsync(@Nonnull String groupName);
 
 	@Nullable
 	ServiceInfo getServiceByName(@Nonnull String name);
