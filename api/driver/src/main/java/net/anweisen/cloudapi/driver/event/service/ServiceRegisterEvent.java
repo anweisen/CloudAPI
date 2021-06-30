@@ -1,4 +1,4 @@
-package net.anweisen.cloudapi.driver.event.events.service;
+package net.anweisen.cloudapi.driver.event.service;
 
 import net.anweisen.cloudapi.driver.service.specific.ServiceInfo;
 

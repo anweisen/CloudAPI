@@ -1,7 +1,7 @@
-package net.anweisen.cloudapi.driver.event.events.service;
+package net.anweisen.cloudapi.driver.event.service;
 
-import net.anweisen.cloudapi.driver.event.Event;
 import net.anweisen.cloudapi.driver.service.specific.ServiceInfo;
+import net.anweisen.cloudapi.driver.event.Event;
 
 import javax.annotation.Nonnull;
 
@@ -20,5 +20,10 @@ public abstract class ServiceEvent implements Event {
 	@Nonnull
 	public ServiceInfo getServiceInfo() {
 		return serviceInfo;
+	}
+
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + "[" + serviceInfo.getName() + ":" + serviceInfo.getUniqueId() + " task=" + serviceInfo.getTask().getName() + " state=" + serviceInfo.getState() + "]";
 	}
 }
