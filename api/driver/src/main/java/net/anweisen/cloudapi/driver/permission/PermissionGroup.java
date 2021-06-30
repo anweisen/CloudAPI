@@ -1,6 +1,7 @@
 package net.anweisen.cloudapi.driver.permission;
 
 import net.anweisen.cloudapi.driver.CloudDriver;
+import net.anweisen.cloudapi.driver.exceptions.UnsupportedCloudFeatureException;
 import net.anweisen.utilities.common.concurrent.task.Task;
 
 import javax.annotation.Nonnull;
@@ -25,17 +26,17 @@ public interface PermissionGroup extends Permissible {
 	/**
 	 * @return the sortId of this group
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support sortIds for permission groups
 	 */
 	int getSortId();
 
 	/**
-	 * Requires the group to be updated via {@link net.anweisen.cloudapi.driver.permission.PermissionManager#updateGroup(PermissionGroup)}.
+	 * Requires the group to be updated via {@link #update()}.
 	 *
 	 * @param id the new sortId
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support group sortIds
 	 */
 	void setSortId(int id);
@@ -43,11 +44,11 @@ public interface PermissionGroup extends Permissible {
 	boolean isDefaultGroup();
 
 	/**
-	 * Requires the group to be updated via {@link net.anweisen.cloudapi.driver.permission.PermissionManager#updateGroup(PermissionGroup)}.
+	 * Requires the group to be updated via {@link #update()}.
 	 *
 	 * @param defaultGroup if this group should be the default group
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If the default group cannot be changed through code
 	 */
 	void setDefaultGroup(boolean defaultGroup);
@@ -59,11 +60,11 @@ public interface PermissionGroup extends Permissible {
 	String getPrefix();
 
 	/**
-	 * Requires the group to be updated via {@link net.anweisen.cloudapi.driver.permission.PermissionManager#updateGroup(PermissionGroup)}.
+	 * Requires the group to be updated via {@link #update()}.
 	 *
 	 * @param prefix the new prefix
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support prefixes for permission groups
 	 */
 	void setPrefix(@Nonnull String prefix);
@@ -75,11 +76,11 @@ public interface PermissionGroup extends Permissible {
 	String getSuffix();
 
 	/**
-	 * Requires the group to be updated via {@link net.anweisen.cloudapi.driver.permission.PermissionManager#updateGroup(PermissionGroup)}.
+	 * Requires the group to be updated via {@link #update()}.
 	 *
 	 * @param suffix the new prefix
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support suffixes for permission groups
 	 */
 	void setSuffix(@Nonnull String suffix);
@@ -91,11 +92,11 @@ public interface PermissionGroup extends Permissible {
 	String getColor();
 
 	/**
-	 * Requires the group to be updated via {@link net.anweisen.cloudapi.driver.permission.PermissionManager#updateGroup(PermissionGroup)}.
+	 * Requires the group to be updated via {@link #update()}.
 	 *
 	 * @param color the new color
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support colors for permission groups
 	 */
 	void setColor(@Nonnull String color);
@@ -107,11 +108,11 @@ public interface PermissionGroup extends Permissible {
 	String getDisplay();
 
 	/**
-	 * Requires the group to be updated via {@link net.anweisen.cloudapi.driver.permission.PermissionManager#updateGroup(PermissionGroup)}.
+	 * Requires the group to be updated via {@link #update()}.
 	 *
 	 * @param display the new display name
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support display names for permission groups
 	 */
 	void setDisplay(@Nonnull String display);

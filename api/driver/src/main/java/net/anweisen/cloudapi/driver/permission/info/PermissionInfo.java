@@ -1,5 +1,7 @@
 package net.anweisen.cloudapi.driver.permission.info;
 
+import net.anweisen.cloudapi.driver.exceptions.UnsupportedCloudFeatureException;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -20,7 +22,7 @@ public interface PermissionInfo extends Comparable<PermissionInfo> {
 	int getPotency();
 
 	/**
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support permission potencys
 	 */
 	void setPotency(int potency);
@@ -32,7 +34,7 @@ public interface PermissionInfo extends Comparable<PermissionInfo> {
 	long getTimeOutMillis();
 
 	/**
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support permission timeouts
 	 */
 	void setTimeOutMillis(long timeoutMillis);

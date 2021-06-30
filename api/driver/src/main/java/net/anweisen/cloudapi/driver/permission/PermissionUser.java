@@ -1,7 +1,8 @@
 package net.anweisen.cloudapi.driver.permission;
 
-import net.anweisen.cloudapi.driver.CloudDriver;
+import net.anweisen.cloudapi.driver.exceptions.UnsupportedCloudFeatureException;
 import net.anweisen.cloudapi.driver.permission.info.PermissionUserGroupInfo;
+import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.utilities.common.concurrent.task.Task;
 
 import javax.annotation.Nonnull;
@@ -33,7 +34,7 @@ public interface PermissionUser extends Permissible {
 	Collection<PermissionUserGroupInfo> getGroups();
 
 	/**
-	 * Requires the user to be updates via {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the user to be updates via {@link #update()}.
 	 *
 	 * @param group the name of the group to add, may be case-sensitive, depending on the cloud
 	 */
@@ -43,19 +44,19 @@ public interface PermissionUser extends Permissible {
 	 * If the user has already the group, commonly the time until the group expires will be set to the given time.
 	 * This may vary depending on the cloud.
 	 *
-	 * Requires the user to be updates via {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the user to be updates via {@link #update()}.
 	 *
 	 * @param group the name of the group to add, may be case-sensitive, depending on the cloud
 	 * @param time when the permission should expire
 	 * @param unit the unit for {@code time}
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *        If this cloud does not support permission timeouts for users
 	 */
 	void addGroup(@Nonnull String group, long time, @Nonnull TimeUnit unit);
 
 	/**
-	 * Requires the user to be updates via {@link PermissionManager#updateUser(PermissionUser)}.
+	 * Requires the user to be updates via {@link #update()}.
 	 *
 	 * @param group the name of the group to remove, may be case-sensitive, depending on the cloud
 	 */

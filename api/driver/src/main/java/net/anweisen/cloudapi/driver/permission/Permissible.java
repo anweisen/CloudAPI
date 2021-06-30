@@ -1,5 +1,6 @@
 package net.anweisen.cloudapi.driver.permission;
 
+import net.anweisen.cloudapi.driver.exceptions.UnsupportedCloudFeatureException;
 import net.anweisen.cloudapi.driver.permission.info.PermissionInfo;
 import net.anweisen.utilities.common.concurrent.task.Task;
 
@@ -37,7 +38,7 @@ public interface Permissible {
 	/**
 	 * @return a map containing all permissions on specific task groups, may or may not be mutable
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support permission granting on specific task groups
 	 */
 	@Nonnull
@@ -69,7 +70,7 @@ public interface Permissible {
 	 * @param time when the permission should expire
 	 * @param unit the unit of {@code time}
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support permission timeouts for this permissible
 	 */
 	void addPermission(@Nonnull String permission, long time, @Nonnull TimeUnit unit);
@@ -92,7 +93,7 @@ public interface Permissible {
 	 * @param time when the permission should expire
 	 * @param unit the unit of {@code time}
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support permission timeouts for this permissible
 	 */
 	void addPermission(@Nonnull String permission, int potency, long time, @Nonnull TimeUnit unit);
@@ -112,7 +113,7 @@ public interface Permissible {
 	 * @param taskGroup the group on which the permission should be granted, eg Lobby
 	 * @param permission the permission to add
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support permission granting on specific task groups
 	 */
 	void addPermission(@Nonnull String taskGroup, @Nonnull String permission);
@@ -126,7 +127,7 @@ public interface Permissible {
 	 * @param time when the permission should expire
 	 * @param unit the unit of {@code time}
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support permission timeouts for this permissible
 	 *         If this cloud does not support permission granting on specific task groups
 	 */
@@ -141,7 +142,7 @@ public interface Permissible {
 	 * @param permission the name of the permission
 	 * @param potency the potency of the permission, will be ignored if this cloud does not support permission potencys
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support permission granting on specific task groups
 	 */
 	void addPermission(@Nonnull String taskGroup, @Nonnull String permission, int potency);
@@ -155,7 +156,7 @@ public interface Permissible {
 	 * @param time when the permission should expire
 	 * @param unit the unit of {@code time}
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support permission timeouts for this permissible
 	 *         If this cloud does not support permission granting on specific task groups
 	 */
@@ -176,7 +177,7 @@ public interface Permissible {
 	 * @param permission the permission to remove
 	 * @return {@code true} if the permission was removed successfully, {@code false} if the given permission was not set
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support permissions on specific task groups
 	 */
 	boolean removePermission(@Nonnull String taskGroup, @Nonnull String permission);
