@@ -17,16 +17,16 @@ public interface EventManager {
 	EventManager addListeners(@Nonnull String channel, @Nonnull Collection<? extends RegisteredListener> listeners);
 
 	@Nonnull
-	<E extends Event> EventManager on(@Nonnull String channel, @Nonnull Class<E> eventClass, @Nonnull Consumer<? super E> action, @Nonnull EventPriority priority, boolean ignoreCancelled);
+	<E extends Event> EventManager on(@Nonnull String channel, @Nonnull Class<E> eventClass, @Nonnull EventPriority priority, boolean ignoreCancelled, @Nonnull Consumer<? super E> action);
 
 	@Nonnull
-	default <E extends Event> EventManager on(@Nonnull String channel, @Nonnull Class<E> eventClass, @Nonnull Consumer<? super E> action, @Nonnull EventPriority priority) {
-		return on(channel, eventClass, action, priority, false);
+	default <E extends Event> EventManager on(@Nonnull String channel, @Nonnull Class<E> eventClass, @Nonnull EventPriority priority, @Nonnull Consumer<? super E> action) {
+		return on(channel, eventClass, priority, false, action);
 	}
 
 	@Nonnull
 	default <E extends Event> EventManager on(@Nonnull String channel, @Nonnull Class<E> eventClass, @Nonnull Consumer<? super E> action) {
-		return on(channel, eventClass, action, EventPriority.NORMAL);
+		return on(channel, eventClass, EventPriority.NORMAL, action);
 	}
 
 	@Nonnull
@@ -87,7 +87,7 @@ public interface EventManager {
 	@Nonnull
 	EventManager unregisterListeners(@Nonnull ClassLoader loader);
 
-	@EventListener
+	@Nonnull
 	EventManager unregisterAll();
 
 	@Nonnull

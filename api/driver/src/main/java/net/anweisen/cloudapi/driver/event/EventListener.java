@@ -27,6 +27,11 @@ public @interface EventListener {
 	 */
 	boolean ignoreCancelled() default false;
 
+	/**
+	 * @return the priority of this listener, indicates the order of execution
+	 *
+	 * @see EventPriority
+	 */
 	@Nonnull
 	EventPriority priority() default EventPriority.NORMAL;
 
