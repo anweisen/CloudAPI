@@ -91,7 +91,7 @@ public interface EventManager {
 	EventManager unregisterAll();
 
 	@Nonnull
-	default EventManager callEvent(@Nonnull Event event) {
+	default <E extends Event> E callEvent(@Nonnull E event) {
 		return callEvent("*", event);
 	}
 
@@ -100,6 +100,6 @@ public interface EventManager {
 	 * @param event the event to call
 	 */
 	@Nonnull
-	EventManager callEvent(@Nonnull String channel, @Nonnull Event event);
+	<E extends Event> E callEvent(@Nonnull String channel, @Nonnull E event);
 
 }
