@@ -27,7 +27,6 @@ public class DefaultModuleController implements ModuleController {
 	private CloudModule module;
 	private ModuleConfig moduleConfig;
 	private ModuleClassLoader classLoader;
-	private FileDocument config;
 
 	private ModuleState state = ModuleState.DISABLED;
 
@@ -129,22 +128,6 @@ public class DefaultModuleController implements ModuleController {
 	@Override
 	public Module getModule() {
 		return module;
-	}
-
-	@Nonnull
-	@Override
-	public FileDocument getConfig() {
-		if (config == null)
-			reloadConfig();
-
-		return config;
-	}
-
-	@Nonnull
-	@Override
-	public FileDocument reloadConfig() {
-		File configFile = new File(dataFolder, "config.json");
-		return config = FileDocument.readJsonFile(configFile);
 	}
 
 	@Nonnull

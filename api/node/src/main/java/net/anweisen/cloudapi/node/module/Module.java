@@ -1,5 +1,7 @@
 package net.anweisen.cloudapi.node.module;
 
+import net.anweisen.utilities.common.config.FileDocument;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -12,6 +14,12 @@ public interface Module {
 
 	@Nonnull
 	ModuleController getController();
+
+	@Nonnull
+	FileDocument getConfig();
+
+	@Nonnull
+	FileDocument reloadConfig();
 
 	@Nonnull
 	static Module getProvidingModule(@Nonnull Class<?> clazz) {

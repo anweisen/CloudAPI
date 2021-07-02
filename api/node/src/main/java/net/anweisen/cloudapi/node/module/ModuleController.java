@@ -30,12 +30,6 @@ public interface ModuleController {
 	ModuleManager getModuleManager();
 
 	@Nonnull
-	FileDocument getConfig();
-
-	@Nonnull
-	FileDocument reloadConfig();
-
-	@Nonnull
 	File getDataFolder();
 
 	@Nonnull

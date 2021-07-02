@@ -8,12 +8,15 @@ import net.anweisen.utilities.common.config.FileDocument;
 import net.anweisen.utilities.common.logging.ILogger;
 
 import javax.annotation.Nonnull;
+import java.io.File;
 
 /**
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  */
 public abstract class CloudModule implements Module {
+
+	private FileDocument config;
 
 	ModuleController controller;
 
@@ -50,8 +53,20 @@ public abstract class CloudModule implements Module {
 	}
 
 	@Nonnull
-	public final FileDocument getConfig() {
-		return getController().getConfig();
+	@Override
+	public FileDocument getConfig() {
+		if (config == null)
+			return reloadConfig();
+		return config;
+	}
+
+	@Nonnull
+	@Override
+	public FileDocument reloadConfig() {
+		synchronized (this) {
+			File configFile = new File(getController().getDataFolder(), "config.json");
+			return config = FileDocument.readJsonFile(configFile);
+		}
 	}
 
 	@Nonnull
