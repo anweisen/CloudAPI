@@ -10,7 +10,8 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>api-wrapper</artifactId>
+	<artifactId>wrapper</artifactId>
+	<name>API Wrapper</name>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>

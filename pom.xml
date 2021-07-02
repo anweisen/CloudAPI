@@ -6,12 +6,13 @@
 
 	<groupId>net.anweisen.cloudapi</groupId>
 	<artifactId>root</artifactId>
+	<name>Root</name>
 	<version>1.0</version>
 	<packaging>pom</packaging>
 	<url>https://github.com/anweisen/CloudAPI</url>
 
 	<properties>
-		<utilities.version>1.2.7</utilities.version>
+		<utilities.version>1.3.0</utilities.version>
 		<spigot.version>1.16.5-R0.1-SNAPSHOT</spigot.version>
 		<bungee.version>1.16-R0.5-SNAPSHOT</bungee.version>
 	</properties>

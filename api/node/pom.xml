@@ -10,7 +10,8 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>api-node</artifactId>
+	<artifactId>node</artifactId>
+	<name>API Node</name>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
