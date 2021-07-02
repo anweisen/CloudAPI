@@ -1,6 +1,6 @@
-package net.anweisen.cloudapi.driver.support;
+package net.anweisen.cloudapi.driver.cloud;
 
-import net.anweisen.cloudapi.driver.utils.exceptions.UnsupportedCloudFeatureException;
+import net.anweisen.cloudapi.driver.exceptions.UnsupportedCloudFeatureException;
 
 import javax.annotation.Nonnull;
 import java.util.*;

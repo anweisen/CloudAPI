@@ -1,5 +1,7 @@
 package net.anweisen.cloudapi.driver;
 
+import net.anweisen.cloudapi.driver.cloud.CloudImplementationInfo;
+import net.anweisen.cloudapi.driver.cloud.SupportInfo;
 import net.anweisen.cloudapi.driver.component.NetworkComponent;
 import net.anweisen.cloudapi.driver.database.DatabaseProvider;
 import net.anweisen.cloudapi.driver.event.EventManager;
@@ -8,18 +10,17 @@ import net.anweisen.cloudapi.driver.node.NodeInfo;
 import net.anweisen.cloudapi.driver.node.NodeManager;
 import net.anweisen.cloudapi.driver.permission.PermissionManager;
 import net.anweisen.cloudapi.driver.player.PlayerManager;
-import net.anweisen.cloudapi.driver.service.ServiceManager;
 import net.anweisen.cloudapi.driver.service.ServiceFactory;
+import net.anweisen.cloudapi.driver.service.ServiceManager;
 import net.anweisen.cloudapi.driver.service.ServiceTaskManager;
-import net.anweisen.cloudapi.driver.support.SupportInfo;
 import net.anweisen.utilities.common.logging.ILogger;
 
 import javax.annotation.Nonnull;
 
 /**
- * Represents the interface to the cloud.
- * This driver can either be in the cloud application ({@code CloudNode}, {@link CloudEnvironment#NODE})
- * or on a cloud service ({@code CloudWrapper}, {@link CloudEnvironment#WRAPPER}) like a minecraft server.
+ * Represents the core interface to the cloud.
+ * This driver can either be run in the cloud application (as {@code CloudNode}, {@link CloudEnvironment#NODE})
+ * or on a cloud service (as {@code CloudWrapper}, {@link CloudEnvironment#WRAPPER}) like a minecraft server.
  * By using the driver class, you dont need to specify where this application should run and can be changed easily.
  *
  * @author anweisen | https://github.com/anweisen
@@ -38,8 +39,11 @@ public interface CloudDriver {
 	@Nonnull
 	SupportInfo getSupportInfo();
 
+	@Nonnull
+	CloudImplementationInfo getCloudImplementation();
+
 	/**
-	 * @return either the service this wrapper is running on or the node of the cloud
+	 * @return either the service this wrapper is running on or the {@link #getNode() node} of the cloud application
 	 */
 	@Nonnull
 	NetworkComponent getComponent();
