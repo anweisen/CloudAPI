@@ -1,6 +1,7 @@
-package net.anweisen.cloudapi.driver.utils.exceptions;
+package net.anweisen.cloudapi.driver.exceptions;
 
-import net.anweisen.cloudapi.driver.support.SupportFlag;
+import net.anweisen.cloudapi.driver.cloud.SupportFlag;
+import net.anweisen.cloudapi.driver.utils.CallerNameResolver;
 
 import javax.annotation.Nullable;
 
@@ -14,13 +15,13 @@ public class UnsupportedCloudFeatureException extends UnsupportedOperationExcept
 
 	private final SupportFlag flag;
 
-	public UnsupportedCloudFeatureException(int ignoreCaller, @Nullable SupportFlag flag) {
-		super(CallerNameResolver.resolve(ignoreCaller) + (flag != null ? " -> SupportFlag." + flag : ""));
+	public UnsupportedCloudFeatureException(int skipCallers, @Nullable SupportFlag flag) {
+		super(CallerNameResolver.resolve(skipCallers) + (flag != null ? " -> SupportFlag." + flag : ""));
 		this.flag = null;
 	}
 
-	public UnsupportedCloudFeatureException(int ignoreCaller) {
-		this(ignoreCaller + 1, null);
+	public UnsupportedCloudFeatureException(int skipCallers) {
+		this(skipCallers + 1, null);
 	}
 
 	public UnsupportedCloudFeatureException(@Nullable SupportFlag flag) {

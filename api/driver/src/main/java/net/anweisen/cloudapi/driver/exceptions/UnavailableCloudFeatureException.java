@@ -1,4 +1,6 @@
-package net.anweisen.cloudapi.driver.utils.exceptions;
+package net.anweisen.cloudapi.driver.exceptions;
+
+import net.anweisen.cloudapi.driver.utils.CallerNameResolver;
 
 import javax.annotation.Nullable;
 

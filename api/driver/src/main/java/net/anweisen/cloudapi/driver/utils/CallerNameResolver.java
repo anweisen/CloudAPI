@@ -1,4 +1,4 @@
-package net.anweisen.cloudapi.driver.utils.exceptions;
+package net.anweisen.cloudapi.driver.utils;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ import java.util.List;
 public final class CallerNameResolver {
 
 	@Nonnull
-	public static String resolve(int ignore) {
+	public static String resolve(int skipCallers) {
 		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-		StackTraceElement element = trace[3 + ignore];
+		StackTraceElement element = trace[3 + skipCallers];
 
 		String className = getApiClassName(element.getClassName());
-		return (className == null ? "" : className + ".") + element.getMethodName() + "(..)";
+		return (className == null ? element.getClassName() : className + ".") + element.getMethodName() + "(..)";
 	}
 
 	private static String getApiClassName(@Nonnull String className) {
