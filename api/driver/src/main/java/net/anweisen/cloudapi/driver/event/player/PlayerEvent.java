@@ -55,6 +55,6 @@ public abstract class PlayerEvent implements Event {
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + "[" + getUniqueId() + ":" + getName() + "]";
+		return this.getClass().getSimpleName() + "[" + getName() + ":" + getUniqueId() + "]";
 	}
 }

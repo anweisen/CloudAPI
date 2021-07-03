@@ -28,6 +28,6 @@ public class PlayerSwitchServerEvent extends PlayerEvent {
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + "[" + getUniqueId() + ":" + getName() + " -> " + getService().getName() + "]";
+		return this.getClass().getSimpleName() + "[" + getName() + ":" + getUniqueId() + " -> " + getService().getName() + "]";
 	}
 }

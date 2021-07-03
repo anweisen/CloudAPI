@@ -34,4 +34,9 @@ public interface CloudOfflinePlayer {
 		CloudDriver.getInstance().getPlayerManager().updateOfflinePlayer(this);
 	}
 
+	@Nonnull
+	default String formatString() {
+		return "CloudPlayer[" + getName() + ":" + getUniqueId() + "]";
+	}
+
 }
