@@ -1,6 +1,7 @@
 package net.anweisen.cloudapi.driver.player;
 
 import net.anweisen.cloudapi.driver.CloudDriver;
+import net.anweisen.cloudapi.driver.service.specific.ServiceInfo;
 import net.anweisen.utilities.common.config.Document;
 
 import javax.annotation.Nonnull;
@@ -16,6 +17,9 @@ public interface CloudPlayer extends CloudOfflinePlayer {
 
 	@Nonnull
 	Document getOnlineProperties();
+
+	@Nonnull
+	ServiceInfo getConnectedService();
 
 	@Override
 	default void update() {
