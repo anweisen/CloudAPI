@@ -12,4 +12,8 @@ public class IllegalModuleConfigException extends IllegalModuleException {
 		super(description);
 	}
 
+	public IllegalModuleConfigException(@Nonnull String message, @Nonnull Throwable cause) {
+		super(message, cause);
+	}
+
 }

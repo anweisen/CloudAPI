@@ -12,4 +12,8 @@ public class IllegalModuleException extends IllegalStateException {
 		super(description);
 	}
 
+	public IllegalModuleException(@Nonnull String message, @Nonnull Throwable cause) {
+		super(message, cause);
+	}
+
 }
