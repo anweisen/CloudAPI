@@ -66,4 +66,9 @@ public interface ChannelMessage {
 	@CheckReturnValue
 	MessageBuilder response();
 
+	@Nonnull
+	default String formatString() {
+		return "ChannelMessage[channel=" + getChannel() + " message=" + getMessage() + " sender" + getSenderName() + " data=" + getData() + "]";
+	}
+
 }

@@ -13,4 +13,9 @@ public interface NodeInfo extends NetworkComponent {
 	@Nonnull
 	String getName();
 
+	@Nonnull
+	default String formatString() {
+		return "Node[" + getName() + " host=" + getHost() + "]";
+	}
+
 }

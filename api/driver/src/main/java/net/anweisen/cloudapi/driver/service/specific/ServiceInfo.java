@@ -50,4 +50,8 @@ public interface ServiceInfo extends NetworkComponent {
 	@Nonnull
 	Document getProperties();
 
+	@Nonnull
+	default String formatString() {
+		return "Service[" + getName() + ":" + getUniqueId() + " task=" + getTask().getName() + " state=" + getState() + "]";
+	}
 }
