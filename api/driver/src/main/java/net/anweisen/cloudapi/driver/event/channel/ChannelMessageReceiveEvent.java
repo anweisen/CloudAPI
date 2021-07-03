@@ -5,8 +5,10 @@ import net.anweisen.cloudapi.driver.event.Event;
 
 import net.anweisen.cloudapi.driver.message.ChannelMessage;
 import net.anweisen.cloudapi.driver.message.CloudMessenger;
+import net.anweisen.cloudapi.driver.message.MessageBuilder;
 import net.anweisen.utilities.common.config.Document;
 
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 
 /**
@@ -32,7 +34,6 @@ public final class ChannelMessageReceiveEvent implements Event {
 	}
 
 	@Nonnull
-	public String getSender() {
 	public String getSenderName() {
 		return message.getSenderName();
 	}
@@ -54,6 +55,12 @@ public final class ChannelMessageReceiveEvent implements Event {
 	@Nonnull
 	public Document getData() {
 		return message.getData();
+	}
+
+	@Nonnull
+	@CheckReturnValue
+	public MessageBuilder response() {
+		return message.response();
 	}
 
 	@Override
