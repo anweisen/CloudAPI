@@ -1,6 +1,7 @@
 package net.anweisen.cloudapi.driver.message;
 
 import net.anweisen.cloudapi.driver.CloudDriver;
+import net.anweisen.cloudapi.driver.component.NetworkComponent;
 import net.anweisen.utilities.common.concurrent.task.Task;
 import net.anweisen.utilities.common.config.Document;
 
@@ -16,7 +17,12 @@ import java.util.Collection;
 public interface ChannelMessage {
 
 	@Nonnull
-	String getSender();
+	String getSenderName();
+
+	/**
+	 * @return the sender or {@code null} if the sender is no longer known to the cloud
+	 */
+	NetworkComponent getSender();
 
 	@Nonnull
 	String getChannel();

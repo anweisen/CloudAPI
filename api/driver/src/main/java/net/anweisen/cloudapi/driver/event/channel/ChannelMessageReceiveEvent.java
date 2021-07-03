@@ -1,5 +1,6 @@
 package net.anweisen.cloudapi.driver.event.channel;
 
+import net.anweisen.cloudapi.driver.component.NetworkComponent;
 import net.anweisen.cloudapi.driver.event.Event;
 
 import net.anweisen.cloudapi.driver.message.ChannelMessage;
@@ -32,6 +33,11 @@ public final class ChannelMessageReceiveEvent implements Event {
 
 	@Nonnull
 	public String getSender() {
+	public String getSenderName() {
+		return message.getSenderName();
+	}
+
+	public NetworkComponent getSender() {
 		return message.getSender();
 	}
 
@@ -52,6 +58,6 @@ public final class ChannelMessageReceiveEvent implements Event {
 
 	@Override
 	public String toString() {
-		return "ChannelMessageReceiveEvent[channel=" + getChannel() + " message=" + getMessage() + " sender=" + getSender() + "]";
+		return "ChannelMessageReceiveEvent[channel=" + getChannel() + " message=" + getMessage() + " sender=" + getSenderName() + "]";
 	}
 }
