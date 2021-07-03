@@ -96,10 +96,31 @@ public interface EventManager {
 	}
 
 	/**
-	 * @param channel the channel to call the event on, will be ignored if not supported
+	 * @param channel the channel to call the event on
 	 * @param event the event to call
+	 * @return the given {@code event} for chaining convenience
 	 */
 	@Nonnull
 	<E extends Event> E callEvent(@Nonnull String channel, @Nonnull E event);
+
+	/**
+	 * The difference between this method and {@link #callEvent(String, Event)} is that
+	 * - When calling {@link #callEvent(String, Event)} on a channel that is not {@literal *}
+	 *   the event is also fired for listeners on the {@literal *} channel.
+	 *   When calling this method on a channel that is not {@literal *}
+	 *   the event is NOT fired for listeners on the {@literal *} channel.
+	 * - When calling {@link #callEvent(String, Event)} on the {@literal *} channel
+	 *   listeners for all channels are fired, for example also on the {@literal example} channel.
+	 *   When calling this method on the {@literal *} channel, only listeners registered for the
+	 *   {@literal *} channel are fired.
+	 *
+	 * @param channel the channel to call the event on
+	 * @param event the event to call
+	 * @return the given {@code event} for chaining convenience
+	 *
+	 * @see #callEvent(String, Event)
+	 */
+	@Nonnull
+	<E extends Event> E callEventOnlyOn(@Nonnull String channel, @Nonnull E event);
 
 }
