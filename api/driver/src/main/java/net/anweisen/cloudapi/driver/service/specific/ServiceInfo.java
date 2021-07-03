@@ -1,5 +1,6 @@
 package net.anweisen.cloudapi.driver.service.specific;
 
+import net.anweisen.cloudapi.driver.component.ComponentType;
 import net.anweisen.cloudapi.driver.component.NetworkComponent;
 import net.anweisen.cloudapi.driver.node.NodeInfo;
 import net.anweisen.cloudapi.driver.service.config.ServiceTask;
@@ -19,6 +20,12 @@ public interface ServiceInfo extends NetworkComponent {
 
 	@Nonnull
 	String getName();
+
+	@Nonnull
+	@Override
+	default ComponentType getComponentType() {
+		return ComponentType.SERVICE;
+	}
 
 	int getPort();
 
