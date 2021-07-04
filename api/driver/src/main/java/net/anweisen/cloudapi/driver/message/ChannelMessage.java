@@ -69,7 +69,7 @@ public interface ChannelMessage {
 
 	@Nonnull
 	default String formatString() {
-		return "ChannelMessage[channel=" + getChannel() + " message=" + getMessage() + " sender" + getSenderName() + " data=" + getData() + "]";
+		return "ChannelMessage[channel=" + getChannel() + " message=" + getMessage() + " sender=" + getSenderName() + " data=" + getData() + "]";
 	}
 
 }
