@@ -12,11 +12,14 @@ import java.util.UUID;
  */
 public interface CloudOfflinePlayer {
 
+	/**
+	 * @return the unique identifier of the player from the Minecraft Java or Bedrock Edition
+	 */
 	@Nonnull
 	UUID getUniqueId();
 
 	/**
-	 * @return the XBoxId from the offlinePlayer if the player has to connect from the Minecraft Bedrock Edition
+	 * @return the XBoxId of the player if the player has to connect from the Minecraft Bedrock Edition
 	 */
 	String getXBoxId();
 
@@ -26,9 +29,15 @@ public interface CloudOfflinePlayer {
 	@Nonnull
 	Document getProperties();
 
-	long getFirstLoginTimeMillis();
+	/**
+	 * @return the time in millis
+	 */
+	long getFirstLogin();
 
-	long getLastLoginTimeMillis();
+	/**
+	 * @return the time in millis
+	 */
+	long getLastLogin();
 
 	default void update() {
 		CloudDriver.getInstance().getPlayerManager().updateOfflinePlayer(this);
