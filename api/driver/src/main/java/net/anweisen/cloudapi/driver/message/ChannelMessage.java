@@ -22,6 +22,7 @@ public interface ChannelMessage {
 	/**
 	 * @return the sender or {@code null} if the sender is no longer known to the cloud
 	 */
+	@Nullable
 	NetworkComponent getSender();
 
 	@Nonnull

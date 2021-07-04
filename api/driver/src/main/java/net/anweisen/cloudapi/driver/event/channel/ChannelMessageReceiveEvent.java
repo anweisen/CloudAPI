@@ -38,6 +38,7 @@ public final class ChannelMessageReceiveEvent implements Event {
 		return message.getSenderName();
 	}
 
+	@Nullable
 	public NetworkComponent getSender() {
 		return message.getSender();
 	}
