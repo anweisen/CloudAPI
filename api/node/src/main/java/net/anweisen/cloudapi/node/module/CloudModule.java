@@ -4,17 +4,22 @@ import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.cloudapi.driver.event.EventManager;
 import net.anweisen.cloudapi.driver.message.CloudMessenger;
 import net.anweisen.cloudapi.node.CloudNode;
+import net.anweisen.utilities.common.config.Document;
 import net.anweisen.utilities.common.config.FileDocument;
 import net.anweisen.utilities.common.logging.ILogger;
 
 import javax.annotation.Nonnull;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  */
 public abstract class CloudModule implements Module {
+
+	private final Map<File, FileDocument> configs = new HashMap<>();
 
 	private FileDocument config;
 
@@ -70,8 +75,28 @@ public abstract class CloudModule implements Module {
 	}
 
 	@Nonnull
+	public FileDocument getConfig(@Nonnull String filename) {
+		if (!filename.contains(".")) filename += ".json";
+
+		if (filename.equals("config.json"))
+			return getConfig();
+
+		synchronized (this) {
+			File file = new File(getDataFolder(), filename);
+			FileDocument config = configs.computeIfAbsent(file, key -> Document.readJsonFile(file).asFileDocument(file));
+			if (!file.exists()) config.save();
+			return config;
+		}
+	}
+
+	@Nonnull
 	public final ModuleConfig getModuleConfig() {
 		return getController().getModuleConfig();
+	}
+
+	@Nonnull
+	public final File getDataFolder() {
+		return getController().getDataFolder();
 	}
 
 	@Nonnull
