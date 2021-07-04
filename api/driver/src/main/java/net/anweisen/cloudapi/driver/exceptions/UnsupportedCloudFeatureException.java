@@ -2,8 +2,11 @@ package net.anweisen.cloudapi.driver.exceptions;
 
 import net.anweisen.cloudapi.driver.cloud.SupportFlag;
 import net.anweisen.cloudapi.driver.utils.CallerNameResolver;
+import net.anweisen.utilities.common.misc.StringUtils;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Arrays;
 
 /**
  * This exception is thrown when a feature is accessed which is not supported by this cloud.
@@ -13,27 +16,30 @@ import javax.annotation.Nullable;
  */
 public class UnsupportedCloudFeatureException extends UnsupportedOperationException {
 
-	private final SupportFlag flag;
+	private final SupportFlag[] flags;
 
-	public UnsupportedCloudFeatureException(int skipCallers, @Nullable SupportFlag flag) {
-		super(CallerNameResolver.resolve(skipCallers) + (flag != null ? " -> SupportFlag." + flag : ""));
-		this.flag = null;
+	public UnsupportedCloudFeatureException(int skipCallers, @Nonnull SupportFlag... flags) {
+		super(
+			CallerNameResolver.resolve(skipCallers) +
+			(flags.length > 0 ? " -> " + StringUtils.getIterableAsString(Arrays.asList(flags), " ", flag -> "SupportFlag." + flag) : "")
+		);
+		this.flags = flags;
 	}
 
 	public UnsupportedCloudFeatureException(int skipCallers) {
-		this(skipCallers + 1, null);
+		this(skipCallers + 1, new SupportFlag[0]);
 	}
 
-	public UnsupportedCloudFeatureException(@Nullable SupportFlag flag) {
-		this(1, flag);
+	public UnsupportedCloudFeatureException(@Nonnull SupportFlag... flags) {
+		this(1, flags);
 	}
 
 	public UnsupportedCloudFeatureException() {
 		this(1);
 	}
 
-	public SupportFlag getFlag() {
-		return flag;
+	@Nonnull
+	public SupportFlag[] getFlags() {
+		return flags;
 	}
-
 }
