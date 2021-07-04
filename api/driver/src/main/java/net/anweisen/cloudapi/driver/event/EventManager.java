@@ -1,5 +1,7 @@
 package net.anweisen.cloudapi.driver.event;
 
+import net.anweisen.cloudapi.driver.CloudDriver;
+
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -7,6 +9,8 @@ import java.util.function.Consumer;
 /**
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
+ *
+ * @see CloudDriver#getEventManager()
  */
 public interface EventManager {
 

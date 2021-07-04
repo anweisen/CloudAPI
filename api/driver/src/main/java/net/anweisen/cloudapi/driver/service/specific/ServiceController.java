@@ -1,6 +1,5 @@
 package net.anweisen.cloudapi.driver.service.specific;
 
-import net.anweisen.cloudapi.driver.service.ServiceManager;
 import net.anweisen.utilities.common.concurrent.task.Task;
 
 import javax.annotation.Nonnull;
@@ -11,8 +10,7 @@ import java.util.Queue;
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  *
- * @see ServiceInfo
- * @see ServiceManager
+ * @see ServiceInfo#getController()
  */
 public interface ServiceController {
 

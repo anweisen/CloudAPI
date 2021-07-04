@@ -1,5 +1,6 @@
 package net.anweisen.cloudapi.driver.service;
 
+import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.cloudapi.driver.service.config.ServiceTask;
 import net.anweisen.utilities.common.concurrent.task.Task;
 
@@ -12,6 +13,7 @@ import java.util.Collection;
  * @since 1.0
  *
  * @see ServiceTask
+ * @see CloudDriver#getTaskManager()
  */
 public interface ServiceTaskManager {
 

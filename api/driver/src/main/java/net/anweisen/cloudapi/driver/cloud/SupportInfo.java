@@ -1,5 +1,6 @@
 package net.anweisen.cloudapi.driver.cloud;
 
+import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.cloudapi.driver.exceptions.UnsupportedCloudFeatureException;
 
 import javax.annotation.Nonnull;
@@ -8,6 +9,8 @@ import java.util.*;
 /**
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
+ *
+ * @see CloudDriver#getSupportInfo()
  */
 public final class SupportInfo {
 

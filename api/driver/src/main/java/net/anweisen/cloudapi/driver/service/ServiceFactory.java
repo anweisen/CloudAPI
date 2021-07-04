@@ -1,5 +1,6 @@
 package net.anweisen.cloudapi.driver.service;
 
+import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.cloudapi.driver.service.config.ServiceTask;
 import net.anweisen.cloudapi.driver.service.specific.ServiceInfo;
 import net.anweisen.utilities.common.concurrent.task.Task;
@@ -10,6 +11,8 @@ import javax.annotation.Nullable;
 /**
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
+ *
+ * @see CloudDriver#getServiceFactory()
  */
 public interface ServiceFactory {
 

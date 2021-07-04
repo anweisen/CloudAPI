@@ -13,6 +13,8 @@ import java.util.UUID;
 /**
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
+ *
+ * @see net.anweisen.cloudapi.driver.service.ServiceManager
  */
 public interface ServiceInfo extends NetworkComponent {
 
