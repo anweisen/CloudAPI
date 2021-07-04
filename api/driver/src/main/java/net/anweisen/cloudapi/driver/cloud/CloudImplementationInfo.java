@@ -17,16 +17,25 @@ public final class CloudImplementationInfo {
 		this.nativeCloudVersion = nativeCloudVersion;
 	}
 
+	/**
+	 * @return the name of the cloud implementation
+	 */
 	@Nonnull
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @return the version of the cloud the api implementation is optimized for
+	 */
 	@Nonnull
 	public String getNativeCloudVersion() {
 		return nativeCloudVersion;
 	}
 
+	/**
+	 * @return the current version of the api
+	 */
 	@Nonnull
 	public String getApiVersion() {
 		return apiVersion;

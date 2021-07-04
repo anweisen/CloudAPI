@@ -11,7 +11,7 @@ import java.util.Collection;
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
  *
- * @see net.anweisen.cloudapi.driver.service.config.ServiceTask
+ * @see ServiceTask
  */
 public interface ServiceTaskManager {
 

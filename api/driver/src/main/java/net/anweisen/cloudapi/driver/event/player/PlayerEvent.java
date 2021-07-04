@@ -39,9 +39,9 @@ public abstract class PlayerEvent implements Event {
 	}
 
 	/**
-	 * Returns the online player object or {@code null} if the player is not / no longer cached.
+	 * Returns the online player object or {@code null} if the player is not cached (no longer / not yet) .
 	 *
-	 * @return the player
+	 * @return the player object or {@code null}
 	 */
 	@Nullable
 	public CloudPlayer getPlayer() {

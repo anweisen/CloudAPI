@@ -1,10 +1,10 @@
 package net.anweisen.cloudapi.driver.message;
 
 import net.anweisen.cloudapi.driver.CloudDriver;
-import net.anweisen.cloudapi.driver.component.NetworkComponent;
-import net.anweisen.cloudapi.driver.node.NodeInfo;
 import net.anweisen.cloudapi.driver.service.config.ServiceTask;
 import net.anweisen.cloudapi.driver.service.specific.ServiceInfo;
+import net.anweisen.cloudapi.driver.component.NetworkComponent;
+import net.anweisen.cloudapi.driver.node.NodeInfo;
 import net.anweisen.utilities.common.config.Document;
 
 import javax.annotation.CheckReturnValue;

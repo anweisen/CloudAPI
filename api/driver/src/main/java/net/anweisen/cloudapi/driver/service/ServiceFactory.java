@@ -26,11 +26,11 @@ public interface ServiceFactory {
 	 * Creates and prepares a new cloud service.
 	 *
 	 * @param task the task the service should be created from
-	 * @param serviceId the id of the new service
+	 * @param serviceNumber the id of the new service, {@link ServiceInfo#getServiceNumber()}
 	 * @return the info of the created service or {@code null} if the service could not be created
 	 */
 	@Nullable
-	ServiceInfo createService(@Nonnull ServiceTask task, int serviceId);
+	ServiceInfo createService(@Nonnull ServiceTask task, int serviceNumber);
 
 	/**
 	 * Creates and prepares a new cloud service.
@@ -45,10 +45,10 @@ public interface ServiceFactory {
 	 * Creates and prepares a new cloud service.
 	 *
 	 * @param task the task the service should be created from
-	 * @param serviceId the id of the new service
+	 * @param serviceNumber the id of the new service, {@link ServiceInfo#getServiceNumber()}
 	 * @return the info of the created service or {@code null} if the service could not be created
 	 */
 	@Nonnull
-	Task<ServiceInfo> createServiceAsync(@Nonnull ServiceTask task, int serviceId);
+	Task<ServiceInfo> createServiceAsync(@Nonnull ServiceTask task, int serviceNumber);
 
 }

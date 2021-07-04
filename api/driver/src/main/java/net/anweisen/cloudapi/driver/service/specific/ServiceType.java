@@ -8,8 +8,19 @@ package net.anweisen.cloudapi.driver.service.specific;
  */
 public enum ServiceType {
 
+	/**
+	 * The type of the service is not known to the api
+	 */
+	OTHER,
+
+	/**
+	 * The service is proxy. Might be bedrock or java.
+	 */
 	PROXY,
-	SERVER,
-	OTHER
+
+	/**
+	 * The service is a minecraft server. Might be bedrock or java.
+	 */
+	SERVER
 
 }

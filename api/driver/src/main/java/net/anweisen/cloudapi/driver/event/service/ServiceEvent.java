@@ -1,7 +1,7 @@
 package net.anweisen.cloudapi.driver.event.service;
 
-import net.anweisen.cloudapi.driver.service.specific.ServiceInfo;
 import net.anweisen.cloudapi.driver.event.Event;
+import net.anweisen.cloudapi.driver.service.specific.ServiceInfo;
 
 import javax.annotation.Nonnull;
 

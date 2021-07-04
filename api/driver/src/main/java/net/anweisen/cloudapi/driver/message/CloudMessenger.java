@@ -1,7 +1,8 @@
 package net.anweisen.cloudapi.driver.message;
 
 import net.anweisen.cloudapi.driver.CloudDriver;
-import net.anweisen.cloudapi.driver.event.events.channel.ChannelMessageReceiveEvent;
+import net.anweisen.cloudapi.driver.event.channel.ChannelMessageReceiveEvent;
+import net.anweisen.cloudapi.driver.exceptions.UnsupportedCloudFeatureException;
 import net.anweisen.utilities.common.concurrent.task.Task;
 import net.anweisen.utilities.common.config.Document;
 
@@ -24,7 +25,7 @@ public interface CloudMessenger {
 	/**
 	 * @param message the message to send
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support channel messages
 	 */
 	void sendMessage(@Nonnull ChannelMessage message);
@@ -34,7 +35,7 @@ public interface CloudMessenger {
 	 * @param message the message to send
 	 * @param data the data to send
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support channel messages
 	 */
 	default void sendMessage(@Nonnull String channel, @Nonnull String message, @Nonnull Document data) {
@@ -48,7 +49,7 @@ public interface CloudMessenger {
 	 * @param message the message to send or {@code null} if no one responded
 	 * @return the first response received
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support query message responses
 	 */
 	@Nullable
@@ -62,7 +63,7 @@ public interface CloudMessenger {
 	 * @param data the data to send
 	 * @return the first response received
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support query message responses
 	 */
 	@Nullable
@@ -77,7 +78,7 @@ public interface CloudMessenger {
 	 * @param message the message to send
 	 * @return the first response received
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support query message responses
 	 */
 	@Nonnull
@@ -91,7 +92,7 @@ public interface CloudMessenger {
 	 * @param data the data to send
 	 * @return the first response received
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support query message responses
 	 */
 	default Task<ChannelMessage> sendSingleMessageQueryAsync(@Nonnull String channel, @Nonnull String message, @Nonnull Document data) {
@@ -105,7 +106,7 @@ public interface CloudMessenger {
 	 * @param message the message to send
 	 * @return a collection containing the responses from all receivers
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support query message responses
 	 */
 	@Nonnull
@@ -119,7 +120,7 @@ public interface CloudMessenger {
 	 * @param data the data to send
 	 * @return a collection containing the responses from all receivers
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support query message responses
 	 */
 	@Nonnull
@@ -134,7 +135,7 @@ public interface CloudMessenger {
 	 * @param message the message to send
 	 * @return a collection containing the responses from all receivers
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support query message responses
 	 */
 	@Nonnull
@@ -148,7 +149,7 @@ public interface CloudMessenger {
 	 * @param data the data to send
 	 * @return a collection containing the responses from all receivers
 	 *
-	 * @throws UnsupportedOperationException
+	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support query message responses
 	 */
 	@Nonnull
@@ -166,8 +167,20 @@ public interface CloudMessenger {
 	CloudMessenger registerChannel(@Nonnull String... channelNames);
 
 	@Nonnull
-	default CloudMessenger listenChannel(@Nonnull String channel, @Nonnull Consumer<ChannelMessageReceiveEvent> action) {
-		CloudDriver.getInstance().getEventManager().addListener(channel, ChannelMessageReceiveEvent.class, action);
+	default CloudMessenger listenForMessage(@Nonnull String channel, @Nonnull Consumer<? super ChannelMessage> action) {
+		CloudDriver.getInstance().getEventManager().on(ChannelMessageReceiveEvent.class, event -> {
+			if (event.getChannel().equals(channel))
+				action.accept(event.getChannelMessage());
+		});
+		return registerChannel(channel);
+	}
+
+	@Nonnull
+	default CloudMessenger listenForMessage(@Nonnull String channel, @Nonnull String message, @Nonnull Consumer<? super ChannelMessage> action) {
+		CloudDriver.getInstance().getEventManager().on(ChannelMessageReceiveEvent.class, event -> {
+			if (event.getChannel().equals(channel) && event.getMessage().equals(message))
+				action.accept(event.getChannelMessage());
+		});
 		return registerChannel(channel);
 	}
 

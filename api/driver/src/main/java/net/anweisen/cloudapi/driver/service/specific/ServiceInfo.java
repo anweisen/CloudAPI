@@ -2,6 +2,7 @@ package net.anweisen.cloudapi.driver.service.specific;
 
 import net.anweisen.cloudapi.driver.component.ComponentType;
 import net.anweisen.cloudapi.driver.component.NetworkComponent;
+import net.anweisen.cloudapi.driver.exceptions.UnsupportedCloudFeatureException;
 import net.anweisen.cloudapi.driver.node.NodeInfo;
 import net.anweisen.cloudapi.driver.service.config.ServiceTask;
 import net.anweisen.utilities.common.config.Document;
@@ -34,12 +35,21 @@ public interface ServiceInfo extends NetworkComponent {
 	 */
 	int getServiceNumber();
 
+	/**
+	 * @return the task of this service
+	 */
 	@Nonnull
 	ServiceTask getTask();
 
+	/**
+	 * @return the node this service is running on
+	 */
 	@Nonnull
 	NodeInfo getNode();
 
+	/**
+	 * @return the current state of this service
+	 */
 	@Nonnull
 	ServiceState getState();
 
@@ -47,7 +57,7 @@ public interface ServiceInfo extends NetworkComponent {
 	ServiceType getType();
 
 	/**
-	 * @return if the service isset to invisible, always {@code false} if not supported
+	 * @return whether the service is set to invisible, or {@code false} if not supported
 	 */
 	boolean isInvisible();
 
@@ -55,7 +65,10 @@ public interface ServiceInfo extends NetworkComponent {
 	ServiceController getController();
 
 	@Nonnull
-	Document getProperties();
+	@Deprecated
+	default Document getProperties() {
+		throw new UnsupportedCloudFeatureException();
+	}
 
 	@Nonnull
 	default String formatString() {
