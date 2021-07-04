@@ -44,7 +44,13 @@ public class DefaultModuleController implements ModuleController {
 		if (input == null) throw new IllegalModuleConfigException("No such resource " + CONFIG_RESOURCE);
 
 		InputStreamReader reader = new InputStreamReader(input, StandardCharsets.UTF_8);
-		Document document = Document.parseJson(reader);
+		Document document;
+
+		try {
+			document = Document.parseJson(reader);
+		} catch (Exception ex) {
+			throw new IllegalModuleConfigException("Unable to parse module config", ex);
+		}
 
 		if (!document.contains("name")) throw new IllegalModuleConfigException("Missing property 'name'");
 		if (!document.contains("version")) throw new IllegalModuleConfigException("Missing property 'version'");
@@ -55,10 +61,10 @@ public class DefaultModuleController implements ModuleController {
 			document.getString("name"),
 			document.getString("author"),
 			document.getString("version"),
-			document.getString("main"),
 			document.getString("description", ""),
-			document.getString("website", ""),
-			FileUtils.getRealFileName(jarFile)
+			FileUtils.getRealFileName(jarFile),
+			document.getString("main"),
+			document.getString("website", "")
 		);
 
 		dataFolder = new File(modulesFolder, moduleConfig.getName());
@@ -78,50 +84,60 @@ public class DefaultModuleController implements ModuleController {
 	@Nonnull
 	@Override
 	public ModuleController loadModule() {
-		CloudDriver.getInstance().getLogger().info("Module {} by {} is being loaded..", module, moduleConfig.getAuthor());
+		synchronized (this) {
+			if (state != ModuleState.DISABLED) return this; // Must be disabled first
 
-		try {
-			module.onLoad();
-			state = ModuleState.LOADED;
-		} catch (Throwable ex) {
-			CloudDriver.getInstance().getLogger().error("An error occurred while loading module {}", module, ex);
-			disableModule();
+			CloudDriver.getInstance().getLogger().info("Module {} by {} is being loaded..", module, moduleConfig.getAuthor());
+
+			try {
+				module.onLoad();
+				state = ModuleState.LOADED;
+			} catch (Throwable ex) {
+				CloudDriver.getInstance().getLogger().error("An error occurred while loading module {}", module, ex);
+				disableModule();
+			}
+
+			return this;
 		}
-
-		return this;
 	}
 
 	@Nonnull
 	@Override
 	public ModuleController enableModule() {
-		CloudDriver.getInstance().getLogger().info("Module {} by {} is being enabled..", module, moduleConfig.getAuthor());
+		synchronized (this) {
+			if (state != ModuleState.LOADED) return this; // Must be loaded first
 
-		try {
-			module.onEnable();
-			state = ModuleState.ENABLED;
-		} catch (Throwable ex) {
-			CloudDriver.getInstance().getLogger().error("An error occurred while enabling module {}", module, ex);
-			disableModule();
+			CloudDriver.getInstance().getLogger().info("Module {} by {} is being enabled..", module, moduleConfig.getAuthor());
+
+			try {
+				module.onEnable();
+				state = ModuleState.ENABLED;
+			} catch (Throwable ex) {
+				CloudDriver.getInstance().getLogger().error("An error occurred while enabling module {}", module, ex);
+				disableModule();
+			}
+
+			return this;
 		}
-
-		return this;
 	}
 
 	@Nonnull
 	@Override
 	public ModuleController disableModule() {
-		CloudDriver.getInstance().getLogger().info("Module {} by {} is being disabled..", module, moduleConfig.getAuthor());
-		CloudDriver.getInstance().getEventManager().unregisterListeners(classLoader);
+		synchronized (this) {
+			CloudDriver.getInstance().getLogger().info("Module {} by {} is being disabled..", module, moduleConfig.getAuthor());
+			CloudDriver.getInstance().getEventManager().unregisterListeners(classLoader);
 
-		try {
-			module.onDisable();
-		} catch (Throwable ex) {
-			CloudDriver.getInstance().getLogger().error("An error occurred while disabling module {}", module, ex);
+			try {
+				module.onDisable();
+			} catch (Throwable ex) {
+				CloudDriver.getInstance().getLogger().error("An error occurred while disabling module {}", module, ex);
+			}
+
+			state = ModuleState.DISABLED;
+
+			return this;
 		}
-
-		state = ModuleState.DISABLED;
-
-		return this;
 	}
 
 	@Nonnull
