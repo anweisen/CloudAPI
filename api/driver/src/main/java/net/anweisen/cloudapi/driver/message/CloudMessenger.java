@@ -15,6 +15,8 @@ import java.util.function.Consumer;
 /**
  * @author anweisen | https://github.com/anweisen
  * @since 1.0
+ *
+ * @see CloudDriver#getMessenger()
  */
 public interface CloudMessenger {
 
@@ -167,19 +169,19 @@ public interface CloudMessenger {
 	CloudMessenger registerChannel(@Nonnull String... channelNames);
 
 	@Nonnull
-	default CloudMessenger listenForMessage(@Nonnull String channel, @Nonnull Consumer<? super ChannelMessage> action) {
+	default CloudMessenger listenForMessage(@Nonnull String channel, @Nonnull Consumer<? super ChannelMessageReceiveEvent> action) {
 		CloudDriver.getInstance().getEventManager().on(ChannelMessageReceiveEvent.class, event -> {
 			if (event.getChannel().equals(channel))
-				action.accept(event.getChannelMessage());
+				action.accept(event);
 		});
 		return registerChannel(channel);
 	}
 
 	@Nonnull
-	default CloudMessenger listenForMessage(@Nonnull String channel, @Nonnull String message, @Nonnull Consumer<? super ChannelMessage> action) {
+	default CloudMessenger listenForMessage(@Nonnull String channel, @Nonnull String message, @Nonnull Consumer<? super ChannelMessageReceiveEvent> action) {
 		CloudDriver.getInstance().getEventManager().on(ChannelMessageReceiveEvent.class, event -> {
 			if (event.getChannel().equals(channel) && event.getMessage().equals(message))
-				action.accept(event.getChannelMessage());
+				action.accept(event);
 		});
 		return registerChannel(channel);
 	}
