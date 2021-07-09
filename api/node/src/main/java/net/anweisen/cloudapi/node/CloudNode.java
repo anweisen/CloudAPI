@@ -4,7 +4,6 @@ import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.cloudapi.driver.CloudEnvironment;
 import net.anweisen.cloudapi.driver.component.NetworkComponent;
 import net.anweisen.cloudapi.node.module.ModuleManager;
-import net.anweisen.utilities.common.logging.ILogger;
 
 import javax.annotation.Nonnull;
 
