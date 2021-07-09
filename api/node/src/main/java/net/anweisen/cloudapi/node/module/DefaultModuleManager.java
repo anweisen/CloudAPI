@@ -2,6 +2,7 @@ package net.anweisen.cloudapi.node.module;
 
 import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.utilities.common.config.FileDocument;
+import net.anweisen.utilities.common.logging.ILogger;
 import net.anweisen.utilities.common.misc.FileUtils;
 
 import javax.annotation.Nonnull;
@@ -13,7 +14,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author anweisen | https://github.com/anweisen
- * @since 1..0
+ * @since 1.0
  */
 public abstract class DefaultModuleManager implements ModuleManager {
 
@@ -26,7 +27,19 @@ public abstract class DefaultModuleManager implements ModuleManager {
 	}
 
 	@Override
-	public void loadModules() {
+	public synchronized void reloadModules() {
+		getLogger().info("Reloading api modules..");
+		disableModules();
+		resolveModules();
+		loadModules();
+		enableModules();
+		getLogger().info("All api modules were reloaded");
+	}
+
+	@Override
+	public synchronized void resolveModules() {
+		modules.clear();
+
 		for (File file : modulesFolder.listFiles((dir, name) -> name.endsWith(".jar"))) {
 			try {
 				CloudDriver.getInstance().getLogger().info("Loading module {}..", FileUtils.getRealFileName(file));
@@ -35,26 +48,27 @@ public abstract class DefaultModuleManager implements ModuleManager {
 				CloudDriver.getInstance().getLogger().error("Could not init module '{}'", FileUtils.getRealFileName(file), ex);
 			}
 		}
+	}
 
+	@Override
+	public synchronized void loadModules() {
 		for (ModuleController module : modules) {
 			module.loadModule();
 		}
 	}
 
 	@Override
-	public void enableModules() {
+	public synchronized void enableModules() {
 		for (ModuleController module : modules) {
 			module.enableModule();
 		}
 	}
 
 	@Override
-	public void disableModules() {
+	public synchronized void disableModules() {
 		for (ModuleController module : modules) {
 			module.disableModule();
 		}
-
-		modules.clear();
 	}
 
 	@Nonnull
@@ -67,6 +81,10 @@ public abstract class DefaultModuleManager implements ModuleManager {
 	@Override
 	public Collection<ModuleController> getApiModules() {
 		return Collections.unmodifiableCollection(modules);
+	}
+
+	protected ILogger getLogger() {
+		return CloudDriver.getInstance().getLogger();
 	}
 
 }

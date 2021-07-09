@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 /**
  * @author anweisen | https://github.com/anweisen
@@ -13,17 +14,27 @@ import java.util.Collections;
 public interface ModuleManager {
 
 	/**
-	 * Loads all modules
+	 * Reloads all api modules
+	 */
+	void reloadModules();
+
+	/**
+	 * Loads jar files from the {@link #getModulesFolder() module folder} and creates all api modules
+	 */
+	void resolveModules();
+
+	/**
+	 * Loads all api modules
 	 */
 	void loadModules();
 
 	/**
-	 * Enables all modules
+	 * Enables all api modules
 	 */
 	void enableModules();
 
 	/**
-	 * Disables all modules
+	 * Disables all api modules
 	 */
 	void disableModules();
 
@@ -38,6 +49,14 @@ public interface ModuleManager {
 	 */
 	@Nonnull
 	Collection<ModuleController> getApiModules();
+
+	/**
+	 * @return an immutable list containing all modules loaded by the CloudAPI with the the given state
+	 */
+	@Nonnull
+	default Collection<ModuleController> getApiModules(@Nonnull ModuleState state) {
+		return Collections.unmodifiableCollection(getApiModules().stream().filter(controller -> controller.getState() == state).collect(Collectors.toList()));
+	}
 
 	/**
 	 * @return an immutable list containing all modules loaded by the cloud system itself
