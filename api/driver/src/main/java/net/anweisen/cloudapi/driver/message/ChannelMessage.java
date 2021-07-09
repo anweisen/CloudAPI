@@ -65,7 +65,7 @@ public interface ChannelMessage {
 
 	@Nonnull
 	@CheckReturnValue
-	MessageBuilder response();
+	MessageBuilder createResponse();
 
 	@Nonnull
 	default String formatString() {
