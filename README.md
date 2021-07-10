@@ -6,10 +6,10 @@ Simplify development for multiple minecraft cloud systems
 `🚧` **In Progress** <br>
 `❌` **Planned** <br>
 
-| name        | status |
+| Name        | Status |
 | ----------- | ------ |
-| CloudNet v3 | 🚧 |
-| CloudNet v2 | ❌ |
-| SimpleCloud | 🚧 |
-| TimoCloud   | ❌ |
-| HytoraCloud | ❌ |
+| [CloudNet v3](https://github.com/CloudNetService/CloudNet-v3) | 🚧 |
+| [CloudNet v2](https://github.com/CloudNetService/CloudNet) | ❌ |
+| [SimpleCloud](https://github.com/theSimpleCloud/SimpleCloud) | 🚧 |
+| [TimoCloud](https://github.com/TimoCloud/TimoCloud)   | ❌ |
+| [HytoraCloud](https://github.com/HytoraCloud/HytoraCloud) | ❌ |
