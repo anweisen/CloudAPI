@@ -11,8 +11,10 @@ import javax.annotation.Nonnull;
 public final class ModuleConfig {
 
 	private final String name, author, version, description, jarFile, mainClass, website;
+	private final String[] depends;
 
-	public ModuleConfig(@Nonnull String name, @Nonnull String author, @Nonnull String version, @Nonnull String description, @Nonnull String jarFileName, @Nonnull String mainClass, @Nonnull String website) {
+	public ModuleConfig(@Nonnull String name, @Nonnull String author, @Nonnull String version, @Nonnull String description, @Nonnull String jarFileName,
+	                    @Nonnull String mainClass, @Nonnull String website, @Nonnull String[] depends) {
 		this.name = name;
 		this.author = author;
 		this.version = version;
@@ -20,6 +22,7 @@ public final class ModuleConfig {
 		this.jarFile = jarFileName;
 		this.mainClass = mainClass;
 		this.website = website;
+		this.depends = depends;
 	}
 
 	@Nonnull
@@ -60,6 +63,11 @@ public final class ModuleConfig {
 	@Nonnull
 	public String getFullName() {
 		return getName() + " v" + getVersion();
+	}
+
+	@Nonnull
+	public String[] getDepends() {
+		return depends;
 	}
 
 	@Override

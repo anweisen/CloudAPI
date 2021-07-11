@@ -4,11 +4,12 @@ import net.anweisen.cloudapi.driver.CloudDriver;
 import net.anweisen.cloudapi.driver.exceptions.IllegalModuleConfigException;
 import net.anweisen.cloudapi.driver.exceptions.IllegalModuleException;
 import net.anweisen.utilities.common.config.Document;
-import net.anweisen.utilities.common.config.FileDocument;
 import net.anweisen.utilities.common.misc.FileUtils;
 
 import javax.annotation.Nonnull;
-import java.io.*;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -22,6 +23,7 @@ public class DefaultModuleController implements ModuleController {
 	protected static final String CONFIG_RESOURCE = "module.json";
 
 	private final DefaultModuleManager manager;
+	private final File jarFile;
 
 	private File dataFolder;
 	private CloudModule module;
@@ -30,12 +32,12 @@ public class DefaultModuleController implements ModuleController {
 
 	private ModuleState state = ModuleState.DISABLED;
 
-	public DefaultModuleController(@Nonnull File jarFile, @Nonnull DefaultModuleManager manager) throws Exception {
+	public DefaultModuleController(@Nonnull File jarFile, @Nonnull DefaultModuleManager manager) {
 		this.manager = manager;
-		init(jarFile, manager.getModulesFolder());
+		this.jarFile = jarFile;
 	}
 
-	private void init(@Nonnull File jarFile, @Nonnull File modulesFolder) throws Exception {
+	public void initConfig() throws Exception {
 		URL url = jarFile.toURI().toURL();
 
 		classLoader = new ModuleClassLoader(url, this.getClass().getClassLoader());
@@ -64,21 +66,26 @@ public class DefaultModuleController implements ModuleController {
 			document.getString("description", ""),
 			FileUtils.getRealFileName(jarFile),
 			document.getString("main"),
-			document.getString("website", "")
+			document.getString("website", ""),
+			document.getStringArray("depends")
 		);
 
-		dataFolder = new File(modulesFolder, moduleConfig.getName());
+	}
 
-		String mainClassName = document.getString("main");
-		Class<?> mainClass = classLoader.loadClass(mainClassName);
+	public void initModule() throws Exception {
+
+		dataFolder = new File(manager.getModulesFolder(), moduleConfig.getName());
+
+		Class<?> mainClass = classLoader.loadClass(moduleConfig.getMainClass());
 		Constructor<?> constructor = mainClass.getDeclaredConstructor();
 		Object instance = constructor.newInstance();
-		if (!(instance instanceof CloudModule)) throw new IllegalModuleException("Main class (" + mainClass.getName() + ") does not extend " + CloudModule.class.getName());
+		if (!(instance instanceof CloudModule)) throw new IllegalModuleException("Main class (" + moduleConfig.getMainClass() + ") does not extend " + CloudModule.class.getName());
 
 		module = (CloudModule) instance;
 		module.controller = this;
 
 		classLoader.module = module;
+
 	}
 
 	@Nonnull
