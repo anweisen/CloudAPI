@@ -1,7 +1,5 @@
 package net.anweisen.cloudapi.node.module;
 
-import net.anweisen.utilities.common.config.FileDocument;
-
 import javax.annotation.Nonnull;
 import java.io.File;
 
