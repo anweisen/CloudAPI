@@ -29,6 +29,8 @@ public interface CloudMessenger {
 	 *
 	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support channel messages
+	 *
+	 * @see ChannelMessage
 	 */
 	void sendMessage(@Nonnull ChannelMessage message);
 
@@ -39,6 +41,8 @@ public interface CloudMessenger {
 	 *
 	 * @throws UnsupportedCloudFeatureException
 	 *         If this cloud does not support channel messages
+	 *
+	 * @see MessageBuilder
 	 */
 	default void sendMessage(@Nonnull String channel, @Nonnull String message, @Nonnull Document data) {
 		ChannelMessage channelMessage = createMessage().channel(channel).message(message).data(data).build();
