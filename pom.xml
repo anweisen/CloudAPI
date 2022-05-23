@@ -19,6 +19,9 @@
 
 	<modules>
 		<module>api</module>
+		<module>examples</module>
+		<module>cloudnet-v3</module>
+		<module>simplecloud</module>
 	</modules>
 
 	<distributionManagement>

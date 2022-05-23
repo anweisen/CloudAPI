@@ -1,0 +1,16 @@
+{
+  "name": "CloudAPI",
+  "group": "net.anweisen.cloudapi",
+  "author": "anweisen",
+  "version": "1.0",
+  "website": "https://github.com/anweisen/CloudAPI",
+  "main": "net.anweisen.cloudapi.cloudnet3.node.launcher.CloudModule",
+  "runtimeModule": true,
+  "dependencies": [
+    {
+      "group": "de.dytanic.cloudnet.modules",
+      "name": "CloudNet-Bridge",
+      "version": "1.2"
+    }
+  ]
+}

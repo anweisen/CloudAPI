@@ -1,0 +1,7 @@
+name: CloudAPI
+version: "1.0"
+api-version: 1.13
+author: anweisen
+main: "net.anweisen.cloudapi.cloudnet3.wrapper.launcher.BukkitPlugin"
+website: https://github.com/anweisen/CloudAPI
+depend: [ CloudNet-Bridge ]

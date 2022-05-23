@@ -1,0 +1,8 @@
+{
+  "name": "Example",
+  "author": "anweisen",
+  "version": "1.0",
+  "main": "net.anweisen.cloudapi.examples.node.ExampleCloudModule",
+  "description": "CloudAPI Example Module",
+  "website": "https://anweisen.net"
+}
